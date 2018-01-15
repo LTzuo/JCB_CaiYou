@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">聚彩宝</string>
+    <string name="login">登录</string>
+    <string name="login_hint_account">手机号</string>
+    <string name="login_hint_password">密码</string>
+    <string name="login_text_forgetpassword">忘记密码?</string>
+    <string name="login_text_phonenumber">用短信验证登录</string>
+    <string name="login_sign">注册</string>
+    <string name="shortmessage_login_getVerificationCode">获取验证码</string>
+    <string name="confirm">确认</string>
+    <string name="newregist">立即注册</string>
+    <string name="text_VerificationCode">验证码</string>
+    <string name="text_new_pwd">新密码</string>
+    <string name="text_confirm_pwd">确认密码</string>
+    <string name="regist_hint1">请您阅读并同意</string>
+    <string name="regist_hint2">《用户服务协议》</string>
+</resources>
