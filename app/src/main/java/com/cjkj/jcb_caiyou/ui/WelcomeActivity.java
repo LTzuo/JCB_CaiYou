@@ -32,9 +32,9 @@ public class WelcomeActivity extends RxActivity {
     private void finishTask() {
 //        boolean isLogin = PreferenceUtil.getBoolean(ConstantUtil.KEY, false);
 //        if (isLogin) {
-//             startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+             startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
 //        } else {
-            startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
+//            startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
 //        }
         WelcomeActivity.this.finish();
     }

@@ -19,4 +19,7 @@
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
+    <!-- 主界面 设置Style -->
+    <style name="MainActivityColorTranslucentTheme" parent="@style/BaseAppTheme" />
+
 </resources>
