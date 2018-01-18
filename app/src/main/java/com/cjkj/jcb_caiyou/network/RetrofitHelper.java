@@ -22,6 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Retrofit帮助类
  * * Created by 1 on 2018/1/16.
  */
+
+
 public class RetrofitHelper {
 
     private static OkHttpClient mOkHttpClient;
@@ -30,23 +32,20 @@ public class RetrofitHelper {
         initOkHttpClient();
     }
 
+    private static MineApi mineApi;
+
     public static MineApi getMineApi() {
-        return createApi(MineApi.class, ApiConstants.BASEURL);
+        if (mineApi == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(mOkHttpClient)
+                    .baseUrl(ApiConstants.BASEURL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
+            mineApi = retrofit.create(MineApi.class);
+        }
+        return mineApi;
     }
-
-    /**
-     * 根据传入的baseUrl，和api创建retrofit
-     */
-    private static <T> T createApi(Class<T> clazz, String baseUrl) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .client(mOkHttpClient)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        return retrofit.create(clazz);
-    }
-
 
     /**
      * 初始化OKHttpClient,设置缓存,设置超时时间,设置打印日志,设置UA拦截器
@@ -74,7 +73,6 @@ public class RetrofitHelper {
             }
         }
     }
-
 
     /**
      * 添加UA拦截器，B站请求API需要加上UA才能正常使用
@@ -124,4 +122,5 @@ public class RetrofitHelper {
             return response;
         }
     }
+
 }

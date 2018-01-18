@@ -3,9 +3,7 @@ package com.cjkj.jcb_caiyou.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -13,19 +11,21 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
-import com.cjkj.jcb_caiyou.util.ToastUtil;
+import com.cjkj.jcb_caiyou.util.SnackbarUtil;
+import java.util.Timer;
+import java.util.TimerTask;
 import butterknife.Bind;
-
 /**
  * 主页
  */
 public class MainActivity extends RxBaseActivity {
 
     private String url = "http://192.168.10.59:8801/userlogin.jspx?sessionId=&uSessionId=";
-    WebView mWebView;
 
-//    @Bind(R.id.toolbar)
-//    Toolbar mToolbar;
+    private static Boolean isExit = false;
+
+    @Bind(R.id.Webview)
+    WebView mWebView;
 
     @Override
     public int getLayoutId() {
@@ -79,8 +79,10 @@ public class MainActivity extends RxBaseActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
             mWebView.goBack();// 返回前一个页面
             return true;
+        }else{
+            exitApp();
         }
-        return super.onKeyDown(keyCode, event);
+        return false;
     }
 
     public class JsInterface {
@@ -128,12 +130,32 @@ public class MainActivity extends RxBaseActivity {
             // Log.i(TAG, "-MyWebViewClient->onPageFinished()--");
             super.onPageFinished(view, url);
         }
-
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
             // 这里进行无网络或错误处理，具体可以根据errorCode的值进行判断，做跟详细的处理。
             // view.loadUrl("file:///android_asset/h.html");
+        }
+    }
+
+    /**
+     * 双击退出App
+     */
+    private void exitApp() {
+        Timer tExit = null;
+        if (isExit == false) {
+            isExit = true; // 准备退出
+            SnackbarUtil.showMessage(this.mWebView, "再按一次退出");
+            tExit = new Timer();
+            tExit.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false; // 取消退出
+                }
+            }, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
+        } else {
+            finish();
+            System.exit(0);
         }
     }
 
