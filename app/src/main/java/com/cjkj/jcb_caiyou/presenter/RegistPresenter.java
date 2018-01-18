@@ -1,5 +1,6 @@
 package com.cjkj.jcb_caiyou.presenter;
 
+import com.cjkj.jcb_caiyou.config.Constants;
 import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistPresenter;
 import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistView;
 import com.cjkj.jcb_caiyou.network.RetrofitHelper;
@@ -58,7 +59,7 @@ public class RegistPresenter implements IRegistPresenter{
     @Override
     public void userRegist(String phonenum, String pwd, String verCode) {
           mSubscription = RetrofitHelper.getMineApi()
-                .userRegist(phonenum,pwd,verCode,"吉林省","长春市")
+                .userRegist(phonenum,pwd,verCode,Constants.Province,Constants.City)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<JsonObject>() {
