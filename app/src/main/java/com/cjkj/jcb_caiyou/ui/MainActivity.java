@@ -1,5 +1,6 @@
 package com.cjkj.jcb_caiyou.ui;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,10 @@ import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
 import com.cjkj.jcb_caiyou.util.SnackbarUtil;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.PermissionListener;
+
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.Bind;
@@ -22,7 +27,6 @@ import butterknife.Bind;
 public class MainActivity extends RxBaseActivity {
 
     private static Boolean isExit = false;
-
     @Bind(R.id.Webview)
     WebView mWebView;
 
@@ -66,8 +70,56 @@ public class MainActivity extends RxBaseActivity {
 
     @Override
     public void initToolBar() {
-
+        //申请权限
+        requestSomePermission();
     }
+
+    private void requestSomePermission() {
+
+        // 先判断是否有权限。
+        if (!AndPermission.hasPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) ||
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) ||
+                !AndPermission.hasPermission(MainActivity.this, Manifest.permission.CAMERA)
+                ) {
+            // 申请权限。
+            AndPermission.with(MainActivity.this)
+                    .requestCode(100)
+                    .permission(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CAMERA)
+                    .send();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        // 只需要调用这一句，其它的交给AndPermission吧，最后一个参数是PermissionListener。
+        AndPermission.onRequestPermissionsResult(requestCode, permissions, grantResults, listener);
+    }
+
+    private PermissionListener listener = new PermissionListener() {
+        @Override
+        public void onSucceed(int requestCode, List<String> grantedPermissions) {
+//            MySnackbar.makeSnackBarBlack(toolbar, "权限申请成功");
+//            if (grantedPermissions.contains("android.permission.ACCESS_FINE_LOCATION")) {
+//                mainPresenter.getLocationInfo();
+//            }
+        }
+
+        @Override
+        public void onFailed(int requestCode, List<String> deniedPermissions) {
+            // 权限申请失败回调。
+            // 用户否勾选了不再提示并且拒绝了权限，那么提示用户到设置中授权。
+            if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, deniedPermissions)) {
+                // 第二种：用自定义的提示语。
+                AndPermission.defaultSettingDialog(MainActivity.this, 300)
+                        .setTitle("权限申请失败")
+                        .setMessage("我们需要的一些权限被您拒绝或者系统发生错误申请失败，请您到设置页面手动授权，否则功能无法正常使用！")
+                        .setPositiveButton("好，去设置")
+                        .show();
+            }
+        }
+    };
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -57,34 +57,33 @@ public class RegistPresenter implements IRegistPresenter{
 
     @Override
     public void userRegist(String phonenum, String pwd, String verCode) {
-          ToastUtil.ShortToast("注册");
+          mSubscription = RetrofitHelper.getMineApi()
+                .userRegist(phonenum,pwd,verCode,"吉林省","长春市")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<JsonObject>() {
+                    @Override
+                    public void onCompleted() {
 
-//          mSubscription = RetrofitHelper.getMineApi()
-//                .userRegist(phonenum,pwd,verCode,"吉林省","长春市")
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<JsonObject>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        mRegistView.showFail("用户注册失败");
-//                    }
-//
-//                    @Override
-//                    public void onNext(JsonObject json) {
-////                        try {
-////                            JsonElement resultTxt = json.get("resultTxt");
-////                            mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
-////                        } catch (Exception e) {
-////                            e.printStackTrace();
-////                            mRegistView.showFail("用户注册失败");
-////                        }
-//                    }
-//                });
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mRegistView.ShowFail("用户注册失败");
+                    }
+
+                    @Override
+                    public void onNext(JsonObject json) {
+                        ToastUtil.ShortToast(json.toString());
+//                        try {
+//                            JsonElement resultTxt = json.get("resultTxt");
+//                            mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                            mRegistView.showFail("用户注册失败");
+//                        }
+                    }
+                });
 
     }
 

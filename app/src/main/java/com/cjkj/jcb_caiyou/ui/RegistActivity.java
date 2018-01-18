@@ -1,7 +1,6 @@
 package com.cjkj.jcb_caiyou.ui;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,8 +36,6 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
         ToastUtil.ShortToast(msg);
     }
 
-    @Bind(R.id.btn_newregist)
-    Button btn_newregist;
     @Bind(R.id.checkbox)
     SmoothCheckBox checkbox;
     @Bind(R.id.activity_main_btn_countdown)
