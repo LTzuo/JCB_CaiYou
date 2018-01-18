@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
+import butterknife.ButterKnife;
+
 
 /**
  * Activity基类
@@ -15,12 +17,11 @@ public abstract class RxBaseActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
         //设置布局内容
         setContentView(getLayoutId());
-
+        ButterKnife.bind(this);
         initViews(savedInstanceState);
         //初始化ToolBar
         initToolBar();
     }
-
 
     /**
      * 设置布局layout
@@ -80,5 +81,6 @@ public abstract class RxBaseActivity extends RxAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ButterKnife.unbind(this);
     }
 }

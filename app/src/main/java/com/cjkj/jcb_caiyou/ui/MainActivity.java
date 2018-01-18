@@ -1,27 +1,39 @@
 package com.cjkj.jcb_caiyou.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import com.cjkj.jcb_caiyou.R;
+import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.util.ToastUtil;
+import butterknife.Bind;
 
 /**
  * 主页
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends RxBaseActivity {
 
     private String url = "http://192.168.10.59:8801/userlogin.jspx?sessionId=&uSessionId=";
     WebView mWebView;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+//    @Bind(R.id.toolbar)
+//    Toolbar mToolbar;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initViews(Bundle savedInstanceState) {
         mWebView = (WebView) findViewById(R.id.Webview);
         WebSettings ws = mWebView.getSettings();
         // 是否允许脚本支持
@@ -44,12 +56,22 @@ public class MainActivity extends AppCompatActivity {
         mWebView.setVerticalScrollBarEnabled(false);
         mWebView.setHorizontalScrollBarEnabled(false);
         // mWeb.setInitialScale(90);
+        mWebView.addJavascriptInterface(new JsInterface(this),"jcb");
         mWebView.getSettings().setDefaultTextEncodingName("UTF -8");// 设置默认为utf-8
         try {
             mWebView.loadUrl(url);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initToolBar() {
+//        mToolbar.setTitle("");// 标题的文字需在setSupportActionBar之前，不然会无效
+//       // mToolbar.setNavigationIcon(R.mipmap.ic_launcher);
+//        setSupportActionBar(mToolbar);
+//        mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+//        mToolbar.setPopupTheme(R.style.ToolBarPopupThemeDay);
     }
 
     @Override
@@ -60,6 +82,31 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    public class JsInterface {
+		private Context mContext;
+		public JsInterface(Context context) {
+			this.mContext = context;
+		}
+
+		@JavascriptInterface
+		public void backPage() {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if(mWebView.canGoBack()){
+                        mWebView.goBack();// 返回前一个页面
+                    }
+                }
+            });
+		}
+
+        @JavascriptInterface
+        public void GotoLogin(){
+            Intent i = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(i);
+        }
+	}
 
     public class MyWebViewClient extends WebViewClient {
 
