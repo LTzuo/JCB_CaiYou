@@ -22,8 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Retrofit帮助类
  * * Created by 1 on 2018/1/16.
  */
-
-
 public class RetrofitHelper {
 
     private static OkHttpClient mOkHttpClient;

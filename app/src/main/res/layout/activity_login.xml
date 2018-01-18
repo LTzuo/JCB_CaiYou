@@ -39,11 +39,12 @@
             android:background="@android:color/transparent"
             android:ellipsize="start"
             android:hint="@string/login_hint_account"
-            android:inputType="textVisiblePassword"
             android:maxLines="1"
             android:textColor="@color/gray"
             android:textColorHint="@color/gray"
-            android:textSize="@dimen/default_medium_text_size" />
+            android:textSize="@dimen/default_medium_text_size"
+            android:inputType="textVisiblePassword"
+            />
 
         <ImageButton
             android:id="@+id/delete_username"

@@ -6,16 +6,16 @@ import java.io.Serializable;
  * Created by 1 on 2018/1/17.
  * 获取验证码模型
  */
-public class VerifitcationCodeBean implements Serializable {
+public class VerifitcationCodeEntity implements Serializable {
 
-    private String result;
+    private int result;
     private String resultTxt;
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

@@ -10,5 +10,7 @@ public class ApiConstants {
     //接口请求的Url
     public static final String BASEURL = "http://192.168.10.59:8801/";
 
+    public static final String MAINURL = " http://192.168.10.59:8801/userlogin.jspx?";
+
     public static final String COMMON_UA_STR = "OhMyBiliBili Android Client/2.1 (100332338@qq.com)";
 }

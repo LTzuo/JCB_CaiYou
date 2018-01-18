@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.network.ApiConstants;
 import com.cjkj.jcb_caiyou.util.SnackbarUtil;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -19,8 +20,6 @@ import butterknife.Bind;
  * 主页
  */
 public class MainActivity extends RxBaseActivity {
-
-    private String url = "http://192.168.10.59:8801/userlogin.jspx?sessionId=&uSessionId=";
 
     private static Boolean isExit = false;
 
@@ -59,7 +58,7 @@ public class MainActivity extends RxBaseActivity {
         mWebView.addJavascriptInterface(new JsInterface(this),"jcb");
         mWebView.getSettings().setDefaultTextEncodingName("UTF -8");// 设置默认为utf-8
         try {
-            mWebView.loadUrl(url);
+            mWebView.loadUrl(ApiConstants.MAINURL+"sessionId=&uSessionId=");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,11 +66,7 @@ public class MainActivity extends RxBaseActivity {
 
     @Override
     public void initToolBar() {
-//        mToolbar.setTitle("");// 标题的文字需在setSupportActionBar之前，不然会无效
-//       // mToolbar.setNavigationIcon(R.mipmap.ic_launcher);
-//        setSupportActionBar(mToolbar);
-//        mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
-//        mToolbar.setPopupTheme(R.style.ToolBarPopupThemeDay);
+
     }
 
     @Override

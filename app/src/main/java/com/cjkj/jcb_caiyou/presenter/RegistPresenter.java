@@ -2,8 +2,10 @@ package com.cjkj.jcb_caiyou.presenter;
 
 import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistPresenter;
 import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistView;
-import com.cjkj.jcb_caiyou.entity.VerifitcationCodeBean;
 import com.cjkj.jcb_caiyou.network.RetrofitHelper;
+import com.cjkj.jcb_caiyou.util.ToastUtil;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,7 +31,7 @@ public class RegistPresenter implements IRegistPresenter{
                 .getVerificationCode(phonenum)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<VerifitcationCodeBean>() {
+                .subscribe(new Observer<JsonObject>() {
                     @Override
                     public void onCompleted() {
 
@@ -37,29 +39,53 @@ public class RegistPresenter implements IRegistPresenter{
 
                     @Override
                     public void onError(Throwable e) {
-                        mRegistView.showVerificationCodeFail("");
+                        mRegistView.ShowFail("获取验证码失败");
                     }
 
                     @Override
-                    public void onNext(VerifitcationCodeBean results) {
-                        if (results != null){
-//                            List<String> imgUrls = new ArrayList<>();
-//                            for (ResultsBean result : categoryResult.results) {
-//                                if (!result.url.isEmpty()){
-//                                    imgUrls.add(result.url);
-//                                }
-//                                PictureModel model = new PictureModel();
-//                                model.desc = result.desc;
-//                                model.url = result.url;
-//                                mModels.add(model);
-//                            }
-                            mRegistView.setVerificationCode("sussesful");
-
-                        }else{
-                            mRegistView.showVerificationCodeFail("fild");
+                    public void onNext(JsonObject json) {
+                        try {
+                            JsonElement resultTxt = json.get("resultTxt");
+                            mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
+                        }catch(Exception e){
+                            e.printStackTrace();
+                            mRegistView.ShowFail("获取验证码失败");
                         }
                     }
                 });
+    }
+
+    @Override
+    public void userRegist(String phonenum, String pwd, String verCode) {
+          ToastUtil.ShortToast("注册");
+
+//          mSubscription = RetrofitHelper.getMineApi()
+//                .userRegist(phonenum,pwd,verCode,"吉林省","长春市")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<JsonObject>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mRegistView.showFail("用户注册失败");
+//                    }
+//
+//                    @Override
+//                    public void onNext(JsonObject json) {
+////                        try {
+////                            JsonElement resultTxt = json.get("resultTxt");
+////                            mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
+////                        } catch (Exception e) {
+////                            e.printStackTrace();
+////                            mRegistView.showFail("用户注册失败");
+////                        }
+//                    }
+//                });
+
     }
 
     @Override
@@ -67,7 +93,6 @@ public class RegistPresenter implements IRegistPresenter{
 //        if(id == R.id.btn_newregist){
 //            getVerificationCode();
 //        }
-
     }
 
     @Override
