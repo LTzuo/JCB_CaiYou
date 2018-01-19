@@ -10,5 +10,12 @@ public class Constants {
     /**市**/
     public static String City = "";
 
+    /**sessionId**/
+    public static String key_SessionId = "SessionId";
+
+    /**uSessionId**/
+    public static String key_uSessionId = "uSessionId";
+
+    public static String LOG = "LOG";
 
 }

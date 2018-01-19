@@ -3,9 +3,6 @@ package com.cjkj.jcb_caiyou.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
-
-import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.ui.LtzWebview;
 
 /**
@@ -22,7 +19,7 @@ public class WebUtils {
         Intent intent = new Intent(context, LtzWebview.class);
            intent.putExtra("title",title) ;
            intent.putExtra("url",url) ;
-        context.startActivity(intent);
+           context.startActivity(intent);
     }
 
     /**

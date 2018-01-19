@@ -1,10 +1,11 @@
 package com.cjkj.jcb_caiyou.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import com.cjkj.jcb_caiyou.R;
+import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
 import com.cjkj.jcb_caiyou.presenter.RegistPresenter;
@@ -34,8 +35,9 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
     }
 
     @Override
-    public void UserRegistSussenfuly(String msg) {
-        ToastUtil.ShortToast(msg);
+    public void UserRegistSussenfuly() {
+        ActivityManager.getInstance().finishActivity(MainActivity.class);
+        startActivity(new Intent(RegistActivity.this, MainActivity.class));
     }
 
     @Bind(R.id.checkbox)
@@ -81,7 +83,7 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
                 mBtnCountDown.startDown();
             }
         }else if(v.getId() == R.id.seeProtocol){
-            WebUtils.openInternal(RegistActivity.this, ApiConstants.XIEYIURL,"彩民用户协议");
+            WebUtils.openInternal(RegistActivity.this, ApiConstants.XIEYIURL,getBaseContext().getString(R.string.USERXIEYITITLE));
 //          WebUtils.openInternal(RegistActivity.this, "file:///android_asset/index.html");
         }
     }

@@ -1,9 +1,14 @@
 package com.cjkj.jcb_caiyou.presenter;
 
+import android.util.Log;
+
+import com.cjkj.jcb_caiyou.CaiYouApp;
 import com.cjkj.jcb_caiyou.config.Constants;
 import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistPresenter;
 import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistView;
 import com.cjkj.jcb_caiyou.network.RetrofitHelper;
+import com.cjkj.jcb_caiyou.util.AppValidationMgr;
+import com.cjkj.jcb_caiyou.util.SPUtil;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -45,13 +50,13 @@ public class RegistPresenter implements IRegistPresenter{
 
                     @Override
                     public void onNext(JsonObject json) {
-                        try {
-                            JsonElement resultTxt = json.get("resultTxt");
-                            mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
-                        }catch(Exception e){
-                            e.printStackTrace();
-                            mRegistView.ShowFail("获取验证码失败");
-                        }
+                        Log.i(Constants.LOG,json.toString());
+                            if(json.has("resultTxt") && AppValidationMgr.isNotEmpty(json.get("resultTxt").toString())) {
+                                JsonElement resultTxt = json.get("resultTxt");
+                                mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
+                            }else{
+                                mRegistView.ShowFail("获取验证码失败");
+                            }
                     }
                 });
     }
@@ -75,14 +80,25 @@ public class RegistPresenter implements IRegistPresenter{
 
                     @Override
                     public void onNext(JsonObject json) {
-                        ToastUtil.ShortToast(json.toString());
-//                        try {
-//                            JsonElement resultTxt = json.get("resultTxt");
-//                            mRegistView.VerificationCodeSussesfuly(String.valueOf(resultTxt));
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                            mRegistView.showFail("用户注册失败");
-//                        }
+                        Log.i(Constants.LOG,json.toString());
+                        if(json.has("resultTxt") && AppValidationMgr.isNotEmpty(json.get("resultTxt").toString())) {
+                            JsonElement resultTxt = json.get("resultTxt");
+                            ToastUtil.ShortToast(String.valueOf(resultTxt));
+                        }
+                        if(json.has("result") && AppValidationMgr.isNotEmpty(json.get("result").toString())) {
+                            JsonElement result = json.get("result");
+                            if(String.valueOf(result).equals("0")){
+                                if(json.has("sessionId") && AppValidationMgr.isNotEmpty(json.get("sessionId").toString())) {
+                                    SPUtil.put(CaiYouApp.getInstance(),Constants.key_SessionId,String.valueOf(json.get("sessionId")));
+                                }
+                                if(json.has("uSessionId") && AppValidationMgr.isNotEmpty(json.get("uSessionId").toString())) {
+                                    SPUtil.put(CaiYouApp.getInstance(),Constants.key_uSessionId,String.valueOf(json.get("uSessionId")));
+                                }
+                                mRegistView.UserRegistSussenfuly();
+                            }
+                        }else{
+                            mRegistView.ShowFail("用户注册失败");
+                        }
                     }
                 });
 

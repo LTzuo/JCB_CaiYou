@@ -4,24 +4,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.baidu.location.BDLocation;
+import com.cjkj.jcb_caiyou.CaiYouApp;
 import com.cjkj.jcb_caiyou.R;
+import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.config.Constants;
 import com.cjkj.jcb_caiyou.location.RxLocation;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
+import com.cjkj.jcb_caiyou.util.SPUtil;
 import com.cjkj.jcb_caiyou.util.SnackbarUtil;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
+import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
+import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.Bind;
 import rx.Subscriber;
-
 /**
  * 主页
  */
@@ -38,7 +44,15 @@ public class MainActivity extends RxBaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        mWebView = (WebView) findViewById(R.id.Webview);
+        TwinklingRefreshLayout refreshLayout = (TwinklingRefreshLayout) findViewById(R.id.refreshLayout);
+        ProgressLayout header = new ProgressLayout(this);
+        refreshLayout.setHeaderView(header);
+        refreshLayout.setFloatRefresh(true);
+        refreshLayout.setOverScrollRefreshShow(false);
+        refreshLayout.setHeaderHeight(44);
+        refreshLayout.setOverScrollHeight(200);
+        refreshLayout.setEnableLoadmore(false);
+        header.setColorSchemeResources(R.color.Blue, R.color.Orange, R.color.Yellow, R.color.Green);
         WebSettings ws = mWebView.getSettings();
         // 是否允许脚本支持
         ws.setJavaScriptEnabled(true);
@@ -63,10 +77,29 @@ public class MainActivity extends RxBaseActivity {
         mWebView.addJavascriptInterface(new JsInterface(this),"jcb");
         mWebView.getSettings().setDefaultTextEncodingName("UTF -8");// 设置默认为utf-8
         try {
-            mWebView.loadUrl(ApiConstants.MAINURL+"sessionId=&uSessionId=");
+            mWebView.loadUrl(ApiConstants.MAINURL+"sessionId="+ SPUtil.get(CaiYouApp.getInstance(),Constants.key_SessionId,"")
+                    +"&uSessionId="+SPUtil.get(CaiYouApp.getInstance(),Constants.key_uSessionId,""));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        refreshLayout.startRefresh();
+        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+            @Override
+            public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        refreshLayout.finishRefreshing();
+                    }
+                }, 4000);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ActivityManager.getInstance().finishAllActivityByWhitelist(MainActivity.class);
     }
 
     @Override
@@ -92,7 +125,6 @@ public class MainActivity extends RxBaseActivity {
                 ToastUtil.ShortToast(bdLocation.getProvince()+bdLocation.getCity());
             }
         });
-
     }
 
     @Override

@@ -1,11 +1,14 @@
 package com.cjkj.jcb_caiyou.network.api;
 
-import com.cjkj.jcb_caiyou.entity.VerifitcationCodeEntity;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
+import com.cjkj.jcb_caiyou.network.RetrofitHelper;
 import com.google.gson.JsonObject;
 
-import org.json.JSONObject;
-
+import okhttp3.Cookie;
+import retrofit2.Retrofit;
+import retrofit2.http.HEAD;
+import retrofit2.http.HTTP;
+import retrofit2.http.POST;
 import rx.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -17,11 +20,11 @@ import retrofit2.http.Query;
 public interface MineApi {
 
     //获取验证码
-    @GET(ApiConstants.BASEURL+"getcode.jspx?")
+    @POST(ApiConstants.BASEURL+"getcode.jspx?")
     Observable<JsonObject> getVerificationCode(@Query("destAddr") String value);
 
     //用户注册
-    @GET(ApiConstants.BASEURL+"")
+    @POST(ApiConstants.BASEURL+"userregister.jspx?")
     Observable<JsonObject> userRegist(@Query("destAddr") String value1,
                                   @Query("token") String value2,
                                           @Query("code") String value3,

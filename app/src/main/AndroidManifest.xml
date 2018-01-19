@@ -36,8 +36,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--主界面-->
         <activity
             android:name=".ui.MainActivity"
+            android:launchMode="singleTop"
             android:theme="@style/MainActivityColorTranslucentTheme"
            />
 
@@ -68,6 +70,7 @@
             android:name=".ui.RegistActivity"
             android:screenOrientation="portrait" />
 
+        <!--公用的h5浏览界面，只做浏览功能，附带刷新功能-->
         <activity
             android:name=".ui.LtzWebview"
             android:configChanges="keyboardHidden|orientation|screenSize"

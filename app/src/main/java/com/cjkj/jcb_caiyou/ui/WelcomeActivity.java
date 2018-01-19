@@ -2,6 +2,8 @@ package com.cjkj.jcb_caiyou.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.cjkj.jcb_caiyou.CaiYouApp;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
 import com.cjkj.jcb_caiyou.util.PreferenceUtil;
@@ -38,7 +40,7 @@ public class WelcomeActivity extends RxActivity {
 //        } else {
 //            startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
 //        }
-        WelcomeActivity.this.finish();
+           //  CaiYouApp.getActivityManager().popActivity(this);
     }
 
     @Override

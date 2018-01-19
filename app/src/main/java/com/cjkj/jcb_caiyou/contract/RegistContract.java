@@ -15,7 +15,7 @@ public interface RegistContract {
 
        void VerificationCodeSussesfuly(String msg);
 
-       void UserRegistSussenfuly(String msg);
+       void UserRegistSussenfuly();
    }
 
     interface IRegistPresenter extends BasePresenter {
