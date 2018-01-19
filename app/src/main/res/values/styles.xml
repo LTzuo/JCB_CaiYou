@@ -28,4 +28,13 @@
         <item name="android:textColor">@color/red_liget</item>
         <item name="android:background">@color/white</item>
     </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/red_liget</item>
+        <item name="colorPrimaryDark">@color/red_liget</item>
+        <item name="colorAccent">@color/red_liget</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="windowActionModeOverlay">true</item>
+    </style>
 </resources>

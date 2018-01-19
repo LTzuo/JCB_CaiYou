@@ -3,39 +3,26 @@ package com.cjkj.jcb_caiyou.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
 import com.cjkj.jcb_caiyou.R;
-import com.thefinestartist.finestwebview.FinestWebView;
+import com.cjkj.jcb_caiyou.ui.LtzWebview;
 
 /**
- * Created by liyu on 2016/7/18.
+ * Created by ltz 2018/1/18.
  */
 public class WebUtils {
-
-
     /**
      * App 内部打开一个网页
      *
      * @param context
      * @param url
      */
-    public static void openInternal(Context context, String url) {
-        new FinestWebView.Builder(context)
-                .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                .stringResRefresh(R.string.menu_action_refresh)
-                .stringResShareVia(R.string.menu_action_share)
-                .stringResCopyLink(R.string.menu_action_copy)
-                .stringResOpenWith(R.string.menu_action_openwith)
-                .titleColor(context.getResources().getColor(R.color.white))
-                .toolbarColor(context.getResources().getColor(R.color.colorPrimary))
-                .statusBarColor(context.getResources().getColor(R.color.colorPrimary))
-                .swipeRefreshColor(context.getResources().getColor(R.color.colorPrimary))
-                .showUrl(false)
-                .webViewDisplayZoomControls(true)
-                .webViewSupportZoom(true)
-                .webViewBuiltInZoomControls(true)
-                .iconDefaultColor(context.getResources().getColor(R.color.Color_White))
-                .show(url);
+    public static void openInternal(Context context, String url,String title) {
+        Intent intent = new Intent(context, LtzWebview.class);
+           intent.putExtra("title",title) ;
+           intent.putExtra("url",url) ;
+        context.startActivity(intent);
     }
 
     /**
@@ -52,22 +39,5 @@ public class WebUtils {
         context.startActivity(intent);
     }
 
-    /**
-     * 加载html 片段
-     *
-     * @param context
-     * @param html
-     */
-    public static void load(Context context, String html) {
-        new FinestWebView.Builder(context)
-                .showIconMenu(false)
-                .titleColor(context.getResources().getColor(R.color.white))
-                .toolbarColor(context.getResources().getColor(ThemeUtil.getCurrentColorPrimary(context)))
-                .statusBarColor(context.getResources().getColor(ThemeUtil.getCurrentColorPrimary(context)))
-                .swipeRefreshColor(context.getResources().getColor(ThemeUtil.getCurrentColorPrimary(context)))
-                .showUrl(false)
-                .iconDefaultColor(context.getResources().getColor(R.color.Color_White))
-                .load(html, "text/html; charset=UTF-8", null);//妈卖批，加载中文乱码
-    }
 
 }

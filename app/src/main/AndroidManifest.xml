@@ -68,6 +68,11 @@
             android:name=".ui.RegistActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.LtzWebview"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="QcCVZyvZnZk2E9ZPBTDZZPtdIPvDjGT0"/>

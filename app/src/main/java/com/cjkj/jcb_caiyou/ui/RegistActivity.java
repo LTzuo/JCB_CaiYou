@@ -81,7 +81,8 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
                 mBtnCountDown.startDown();
             }
         }else if(v.getId() == R.id.seeProtocol){
-            WebUtils.openInternal(RegistActivity.this, ApiConstants.XIEYIURL);
+            WebUtils.openInternal(RegistActivity.this, ApiConstants.XIEYIURL,"彩民用户协议");
+//          WebUtils.openInternal(RegistActivity.this, "file:///android_asset/index.html");
         }
     }
 
