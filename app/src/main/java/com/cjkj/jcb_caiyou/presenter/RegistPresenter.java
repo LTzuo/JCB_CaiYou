@@ -89,10 +89,10 @@ public class RegistPresenter implements IRegistPresenter{
                             JsonElement result = json.get("result");
                             if(String.valueOf(result).equals("0")){
                                 if(json.has("sessionId") && AppValidationMgr.isNotEmpty(json.get("sessionId").toString())) {
-                                    SPUtil.put(CaiYouApp.getInstance(),Constants.key_SessionId,String.valueOf(json.get("sessionId")));
+                                    SPUtil.put(CaiYouApp.getInstance(),Constants.key_SessionId,json.get("sessionId"));
                                 }
                                 if(json.has("uSessionId") && AppValidationMgr.isNotEmpty(json.get("uSessionId").toString())) {
-                                    SPUtil.put(CaiYouApp.getInstance(),Constants.key_uSessionId,String.valueOf(json.get("uSessionId")));
+                                    SPUtil.put(CaiYouApp.getInstance(),Constants.key_uSessionId,json.get("uSessionId"));
                                 }
                                 mRegistView.UserRegistSussenfuly();
                             }

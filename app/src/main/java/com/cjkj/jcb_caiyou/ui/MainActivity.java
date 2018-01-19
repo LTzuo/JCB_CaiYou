@@ -45,14 +45,14 @@ public class MainActivity extends RxBaseActivity {
     @Override
     public void initViews(Bundle savedInstanceState) {
         TwinklingRefreshLayout refreshLayout = (TwinklingRefreshLayout) findViewById(R.id.refreshLayout);
-        ProgressLayout header = new ProgressLayout(this);
-        refreshLayout.setHeaderView(header);
-        refreshLayout.setFloatRefresh(true);
-        refreshLayout.setOverScrollRefreshShow(false);
-        refreshLayout.setHeaderHeight(44);
-        refreshLayout.setOverScrollHeight(200);
-        refreshLayout.setEnableLoadmore(false);
-        header.setColorSchemeResources(R.color.Blue, R.color.Orange, R.color.Yellow, R.color.Green);
+//        ProgressLayout header = new ProgressLayout(this);
+//        refreshLayout.setHeaderView(header);
+//        refreshLayout.setFloatRefresh(true);
+//        refreshLayout.setOverScrollRefreshShow(false);
+//        refreshLayout.setHeaderHeight(44);
+//        refreshLayout.setOverScrollHeight(200);
+//        refreshLayout.setEnableLoadmore(false);
+//        header.setColorSchemeResources(R.color.Blue, R.color.Orange, R.color.Yellow, R.color.Green);
         WebSettings ws = mWebView.getSettings();
         // 是否允许脚本支持
         ws.setJavaScriptEnabled(true);
@@ -77,23 +77,23 @@ public class MainActivity extends RxBaseActivity {
         mWebView.addJavascriptInterface(new JsInterface(this),"jcb");
         mWebView.getSettings().setDefaultTextEncodingName("UTF -8");// 设置默认为utf-8
         try {
-            mWebView.loadUrl(ApiConstants.MAINURL+"sessionId="+ SPUtil.get(CaiYouApp.getInstance(),Constants.key_SessionId,"")
-                    +"&uSessionId="+SPUtil.get(CaiYouApp.getInstance(),Constants.key_uSessionId,""));
+            mWebView.loadUrl(ApiConstants.MAINURL+"sessionId="+ SPUtil.get(CaiYouApp.getInstance(),Constants.key_SessionId,"").toString().replace("\"","")
+                    +"&uSessionId="+SPUtil.get(CaiYouApp.getInstance(),Constants.key_uSessionId,"").toString().replace("\"",""));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        refreshLayout.startRefresh();
-        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
-            @Override
-            public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        refreshLayout.finishRefreshing();
-                    }
-                }, 4000);
-            }
-        });
+//        refreshLayout.startRefresh();
+//        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
+//            @Override
+//            public void onRefresh(final TwinklingRefreshLayout refreshLayout) {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        refreshLayout.finishRefreshing();
+//                    }
+//                }, 4000);
+//            }
+//        });
     }
 
     @Override
@@ -120,8 +120,8 @@ public class MainActivity extends RxBaseActivity {
 
             @Override
             public void onNext(BDLocation bdLocation) {
-                Constants.Province = bdLocation.getProvince();
-                Constants.City = bdLocation.getCity();
+                Constants.Province = bdLocation.getProvince() == null ? "" : bdLocation.getProvince();
+                Constants.City = bdLocation.getCity() == null ? "" : bdLocation.getCity();
                 ToastUtil.ShortToast(bdLocation.getProvince()+bdLocation.getCity());
             }
         });

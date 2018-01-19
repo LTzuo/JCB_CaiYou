@@ -10,7 +10,7 @@ public class ApiConstants {
     //接口请求的Url
     public static final String BASEURL = "http://192.168.10.59:8801/";
 
-    public static final String MAINURL = " http://192.168.10.59:8801/userlogin.jspx?";
+    public static final String MAINURL = "http://192.168.10.59:8801/userlogin.jspx?";
 
     //用户协议url
     public static final String XIEYIURL = "http://192.168.10.59:8801/pages/rule/ruleinfo.html?type=1";

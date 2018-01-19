@@ -11,19 +11,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.cjkj.jcb_caiyou.R;
+import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.contract.LoginContract;
+import com.cjkj.jcb_caiyou.presenter.LoginPressenter;
+import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
+
+import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * 登录界面
  */
-public class LoginActivity extends RxBaseActivity implements View.OnClickListener {
+public class LoginActivity extends RxBaseActivity implements LoginContract.ILogView {
 
+    LoginPressenter mLoginRresenter;
+
+    @Bind(R.id.et_username)
     EditText et_username;
+    @Bind(R.id.et_pwd)
     EditText et_pwd;
+    @Bind(R.id.delete_username)
     ImageButton delete_username;
-    Button btn_login;
-    TextView forgetpwd,login_tv_phone,login_tv_regin;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_login;
@@ -31,13 +42,7 @@ public class LoginActivity extends RxBaseActivity implements View.OnClickListene
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        et_username = (EditText) findViewById(R.id.et_username);
-        et_pwd = (EditText) findViewById(R.id.et_pwd);
-        delete_username = (ImageButton) findViewById(R.id.delete_username);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        forgetpwd = (TextView) findViewById(R.id.forgetpwd);
-        login_tv_phone = (TextView) findViewById(R.id.login_tv_phone);
-        login_tv_regin = (TextView) findViewById(R.id.login_tv_regin);
+        mLoginRresenter = new LoginPressenter(this);
         et_username.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus && et_username.getText().length() > 0) {
                 delete_username.setVisibility(View.VISIBLE);
@@ -69,17 +74,7 @@ public class LoginActivity extends RxBaseActivity implements View.OnClickListene
             public void afterTextChanged(Editable s) {
             }
         });
-        initListeners();
-    }
 
-
-
-    private void initListeners() {
-        delete_username.setOnClickListener(this);
-        btn_login.setOnClickListener(this);
-        forgetpwd.setOnClickListener(this);
-        login_tv_phone.setOnClickListener(this);
-        login_tv_regin.setOnClickListener(this);
     }
 
     @Override
@@ -87,8 +82,8 @@ public class LoginActivity extends RxBaseActivity implements View.OnClickListene
 
     }
 
-    @Override
-    public void onClick(View v) {
+    @OnClick({R.id.delete_username,R.id.btn_login,R.id.forgetpwd,R.id.login_tv_phone,R.id.login_tv_regin})
+    public void BtnClick(View v) {
         if(v.getId() == R.id.delete_username){
             et_username.setText("");
             et_pwd.setText("");
@@ -97,7 +92,10 @@ public class LoginActivity extends RxBaseActivity implements View.OnClickListene
             et_username.setFocusableInTouchMode(true);
             et_username.requestFocus();
         }else if(v.getId() == R.id.btn_login){
-            ToastUtil.ShortToast("登录");
+            if(AppValidationMgr.checkPhoneNum(et_username.getText().toString()) &&
+                    AppValidationMgr.checkPwd(et_pwd.getText().toString(),et_pwd.getText().toString())) {
+                mLoginRresenter.userLogin(et_username.getText().toString(),et_pwd.getText().toString());
+            }
         }else if(v.getId() == R.id.forgetpwd){
             startActivity(new Intent(LoginActivity.this,ForgetPasswordActivity.class));
         }else if(v.getId() == R.id.login_tv_phone){
@@ -105,5 +103,27 @@ public class LoginActivity extends RxBaseActivity implements View.OnClickListene
         }else if(v.getId() == R.id.login_tv_regin){
             startActivity(new Intent(LoginActivity.this,RegistActivity.class));
         }
+    }
+
+    @Override
+    public void ShowFail(String msg) {
+        ToastUtil.ShortToast(msg);
+    }
+
+    @Override
+    public void LoginSussesful() {
+        ActivityManager.getInstance().finishActivity(MainActivity.class);
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+    }
+
+    @Override
+    public void VerificationCodeSussesfuly(String msg) {
+        //正常登录，不走此方法
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLoginRresenter.unSubscribe();
     }
 }

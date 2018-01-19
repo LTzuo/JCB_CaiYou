@@ -1,5 +1,6 @@
 package com.cjkj.jcb_caiyou.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,20 +9,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import com.cjkj.jcb_caiyou.R;
+import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.contract.LoginContract;
+import com.cjkj.jcb_caiyou.presenter.LoginPressenter;
+import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.lucenlee.countdownlibrary.CountdownButton;
+
+import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * 短信验证登录业
  */
-public class ShortmessageLoginActivity extends RxBaseActivity implements View.OnClickListener{
+public class ShortmessageLoginActivity extends RxBaseActivity implements LoginContract.ILogView{
 
-    CountdownButton btn_countdown;
-    ImageButton delete_username;
+    LoginPressenter mLoginRresenter;
+
+    @Bind(R.id.et_username)
     EditText et_username;
-    EditText et_pwd;
-    Button btn_login;
+    @Bind(R.id.et_vercode)
+    EditText et_vercode;
+    @Bind(R.id.activity_main_btn_countdown)
+    CountdownButton mBtnCountDown;
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_shortmessage_login;
@@ -29,49 +41,7 @@ public class ShortmessageLoginActivity extends RxBaseActivity implements View.On
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        btn_countdown = (CountdownButton) findViewById(R.id.activity_main_btn_countdown);
-        delete_username = (ImageButton) findViewById(R.id.delete_username);
-        et_username = (EditText) findViewById(R.id.et_username);
-        et_pwd = (EditText) findViewById(R.id.et_pwd);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        et_username.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus && et_username.getText().length() > 0) {
-                delete_username.setVisibility(View.VISIBLE);
-            } else {
-                delete_username.setVisibility(View.GONE);
-            }
-
-        });
-
-        et_username.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // 如果用户名清空了 清空密码 清空记住密码选项
-                et_pwd.setText("");
-                if (s.length() > 0) {
-                    // 如果用户名有内容时候 显示删除按钮
-                    delete_username.setVisibility(View.VISIBLE);
-                } else {
-                    // 如果用户名有内容时候 显示删除按钮
-                    delete_username.setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-        initListeners();
-    }
-
-    private void initListeners() {
-        delete_username.setOnClickListener(this);
-        btn_countdown.setOnClickListener(this);
-        btn_login.setOnClickListener(this);
+        mLoginRresenter = new LoginPressenter(this);
     }
 
     @Override
@@ -79,20 +49,42 @@ public class ShortmessageLoginActivity extends RxBaseActivity implements View.On
 
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.delete_username){
-            et_username.setText("");
-            et_pwd.setText("");
-            delete_username.setVisibility(View.GONE);
-            et_username.setFocusable(true);
-            et_username.setFocusableInTouchMode(true);
-            et_username.requestFocus();
-        }else if(v.getId() == R.id.btn_login){
-            ToastUtil.ShortToast("登录");
+    @OnClick({R.id.activity_main_btn_countdown,R.id.btn_login})
+    public void btnClick(View v) {
+        if(v.getId() == R.id.btn_login){
+            if(AppValidationMgr.checkPhoneNum(et_username.getText().toString()) &&
+                    AppValidationMgr.checkVerCode(et_vercode.getText().toString())) {
+                mLoginRresenter.userShortMessageLogin(et_username.getText().toString(),et_vercode.getText().toString());
+            }
         }
        else if(v.getId() == R.id.activity_main_btn_countdown){
-            btn_countdown.startDown();
+            if(AppValidationMgr.checkPhoneNum(et_username.getText().toString())){
+                mLoginRresenter.getVerificationCode(et_username.getText().toString());
+                mBtnCountDown.startDown();
+            }
         }
+    }
+
+    @Override
+    public void ShowFail(String msg) {
+        ToastUtil.ShortToast(msg);
+    }
+
+    @Override
+    public void LoginSussesful() {
+        ActivityManager.getInstance().finishActivity(MainActivity.class);
+        startActivity(new Intent(ShortmessageLoginActivity.this, MainActivity.class));
+    }
+
+    @Override
+    public void VerificationCodeSussesfuly(String msg) {
+        //短信验证登录，走此方法
+        ToastUtil.ShortToast(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLoginRresenter.unSubscribe();
     }
 }

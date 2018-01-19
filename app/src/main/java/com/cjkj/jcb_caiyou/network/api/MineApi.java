@@ -23,11 +23,25 @@ public interface MineApi {
     @POST(ApiConstants.BASEURL+"getcode.jspx?")
     Observable<JsonObject> getVerificationCode(@Query("destAddr") String value);
 
-    //用户注册
+    //用户注册/忘记密码公用
     @POST(ApiConstants.BASEURL+"userregister.jspx?")
     Observable<JsonObject> userRegist(@Query("destAddr") String value1,
                                   @Query("token") String value2,
                                           @Query("code") String value3,
                                           @Query("province") String value4,
                                           @Query("city") String value5);
+
+    //用户登录
+    @POST(ApiConstants.BASEURL+"useraccnumlogin.jspx?")
+    Observable<JsonObject> userLogin(@Query("destAddr") String value1,
+                                      @Query("token") String value2,
+                                      @Query("province") String value4,
+                                      @Query("city") String value5);
+
+    //用户短信登录
+    @POST(ApiConstants.BASEURL+"useraccnumlogin.jspx?")
+    Observable<JsonObject> userShortMessageLogin(@Query("destAddr") String value1,
+                                     @Query("code") String value2,
+                                     @Query("province") String value4,
+                                     @Query("city") String value5);
 }

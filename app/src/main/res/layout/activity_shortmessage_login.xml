@@ -47,15 +47,7 @@
                 android:maxLength="11"
                 />
 
-            <ImageButton
-                android:id="@+id/delete_username"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:paddingEnd="@dimen/default_general_margin"
-                android:paddingStart="@dimen/default_grow_margin"
-                android:src="@drawable/ic_edittext_clear"
-                android:visibility="gone" />
+
         </LinearLayout>
 
         <View
@@ -70,7 +62,7 @@
             android:gravity="center_vertical">
 
             <EditText
-                android:id="@+id/et_pwd"
+                android:id="@+id/et_vercode"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
