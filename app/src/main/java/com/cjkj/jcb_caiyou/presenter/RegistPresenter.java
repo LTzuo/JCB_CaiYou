@@ -27,9 +27,9 @@ public class RegistPresenter implements IRegistPresenter{
     }
 
     @Override
-    public void getVerificationCode(String phonenum) {
+    public void getVerificationCode(String value) {
         mSubscription = RetrofitHelper.getMineApi()
-                .getVerificationCode(phonenum)
+                .getVerificationCode(value)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<JsonObject>() {
@@ -57,9 +57,9 @@ public class RegistPresenter implements IRegistPresenter{
     }
 
     @Override
-    public void userRegist(String phonenum, String pwd, String verCode) {
+    public void userRegist(String value1, String value2, String value3) {
           mSubscription = RetrofitHelper.getMineApi()
-                .userRegist(phonenum,pwd,verCode,Constants.Province,Constants.City)
+                .userRegist(value1,value2,value3,Constants.Province,Constants.City)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<JsonObject>() {

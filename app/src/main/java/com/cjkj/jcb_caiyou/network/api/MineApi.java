@@ -18,13 +18,13 @@ public interface MineApi {
 
     //获取验证码
     @GET(ApiConstants.BASEURL+"getcode.jspx?")
-    Observable<JsonObject> getVerificationCode(@Query("destAddr") String destAddr);
+    Observable<JsonObject> getVerificationCode(@Query("destAddr") String value);
 
     //用户注册
     @GET(ApiConstants.BASEURL+"")
-    Observable<JsonObject> userRegist(@Query("destAddr") String destAddr,
-                                  @Query("token") String token,
-                                          @Query("code") String code,
-                                          @Query("province") String province,
-                                          @Query("city") String city);
+    Observable<JsonObject> userRegist(@Query("destAddr") String value1,
+                                  @Query("token") String value2,
+                                          @Query("code") String value3,
+                                          @Query("province") String value4,
+                                          @Query("city") String value5);
 }

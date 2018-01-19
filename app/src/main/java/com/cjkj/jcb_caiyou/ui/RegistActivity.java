@@ -6,9 +6,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.network.ApiConstants;
 import com.cjkj.jcb_caiyou.presenter.RegistPresenter;
 import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
+import com.cjkj.jcb_caiyou.util.WebUtils;
 import com.lucenlee.countdownlibrary.CountdownButton;
 import com.mixiaoxiao.smoothcompoundbutton.SmoothCheckBox;
 import butterknife.Bind;
@@ -63,7 +65,7 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
 
     }
 
-    @OnClick({R.id.btn_newregist,R.id.activity_main_btn_countdown})
+    @OnClick({R.id.btn_newregist,R.id.activity_main_btn_countdown,R.id.seeProtocol})
     public void BtnClick(View v){
         if(v.getId() == R.id.btn_newregist){
             if(AppValidationMgr.checkPhoneNum(et_username.getText().toString()) &&
@@ -78,8 +80,14 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
                 mRegistPresenter.getVerificationCode(et_username.getText().toString());
                 mBtnCountDown.startDown();
             }
+        }else if(v.getId() == R.id.seeProtocol){
+            WebUtils.openInternal(RegistActivity.this, ApiConstants.XIEYIURL);
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mRegistPresenter.unSubscribe();
+    }
 }
