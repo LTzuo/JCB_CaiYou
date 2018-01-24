@@ -3,7 +3,7 @@ package com.cjkj.jcb_caiyou.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import com.cjkj.jcb_caiyou.ui.LtzWebview;
+import com.cjkj.jcb_caiyou.ui.is_h5.LtzWebview;
 
 /**
  * Created by ltz 2018/1/18.

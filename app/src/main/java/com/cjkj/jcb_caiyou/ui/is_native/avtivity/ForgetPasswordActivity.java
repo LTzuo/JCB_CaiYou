@@ -1,7 +1,6 @@
-package com.cjkj.jcb_caiyou.ui;
+package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,12 +8,12 @@ import android.widget.EditText;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
-import com.cjkj.jcb_caiyou.contract.RegistContract;
-import com.cjkj.jcb_caiyou.presenter.RegistPresenter;
+import com.cjkj.jcb_caiyou.presenter.regist.RegistContract;
+import com.cjkj.jcb_caiyou.presenter.regist.RegistPresenter;
+import com.cjkj.jcb_caiyou.ui.is_h5.H5MainActivity;
 import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.lucenlee.countdownlibrary.CountdownButton;
-import com.mixiaoxiao.smoothcompoundbutton.SmoothCheckBox;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -48,8 +47,8 @@ public class ForgetPasswordActivity extends RxBaseActivity implements RegistCont
 
     @Override
     public void UserRegistSussenfuly() {
-        ActivityManager.getInstance().finishActivity(MainActivity.class);
-        startActivity(new Intent(ForgetPasswordActivity.this, MainActivity.class));
+        ActivityManager.getInstance().finishActivity(H5MainActivity.class);
+        startActivity(new Intent(ForgetPasswordActivity.this, H5MainActivity.class));
     }
 
     @Override

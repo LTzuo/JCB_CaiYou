@@ -1,5 +1,6 @@
 package com.cjkj.jcb_caiyou.network.api;
 
+import com.cjkj.jcb_caiyou.entity.lottery.CategoryResult;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
 import com.cjkj.jcb_caiyou.network.RetrofitHelper;
 import com.google.gson.JsonObject;
@@ -9,6 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.http.HEAD;
 import retrofit2.http.HTTP;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import rx.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -44,4 +46,16 @@ public interface MineApi {
                                      @Query("code") String value2,
                                      @Query("province") String value4,
                                      @Query("city") String value5);
+
+
+    /**
+     * 根据category获取Android、iOS等干货数据
+     * @param category  类别
+     * @param count     条目数目
+     * @param page      页数
+     */
+    @GET("data/{category}/{count}/{page}")
+    Observable<CategoryResult> getCategoryData(@Path("category")String category, @Path("count")int count, @Path("page")int page);
+
+
 }

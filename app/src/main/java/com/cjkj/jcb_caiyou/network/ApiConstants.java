@@ -15,5 +15,10 @@ public class ApiConstants {
     //用户协议url
     public static final String XIEYIURL = "http://192.168.10.59:8801/pages/rule/ruleinfo.html?type=1";
 
+
+    //测试
+    public static final String TESTURL = "http://gank.io/api/";
+
     public static final String COMMON_UA_STR = "OhMyBiliBili Android Client/2.1 (100332338@qq.com)";
+
 }

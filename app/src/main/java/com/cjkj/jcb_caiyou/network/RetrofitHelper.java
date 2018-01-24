@@ -52,6 +52,23 @@ public class RetrofitHelper {
         return mineApi;
     }
 
+    public static MineApi getTestApi() {
+        return createApi(MineApi.class, ApiConstants.TESTURL);
+    }
+
+    /**
+     * 根据传入的baseUrl，和api创建retrofit
+     */
+    private static <T> T createApi(Class<T> clazz, String baseUrl) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .client(mOkHttpClient)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(clazz);
+    }
+
     /**
      * 初始化OKHttpClient,设置缓存,设置超时时间,设置打印日志,设置UA拦截器
      */

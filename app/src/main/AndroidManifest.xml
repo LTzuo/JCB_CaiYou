@@ -36,16 +36,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--主界面-->
+        <!--主界面h5-->
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.is_h5.H5MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/MainActivityColorTranslucentTheme"
            />
 
         <!-- 欢迎页 -->
         <activity
-            android:name=".ui.WelcomeActivity"
+            android:name=".ui.is_native.avtivity.WelcomeActivity"
             android:theme="@style/ColorTranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,27 +55,31 @@
         </activity>
         <!-- 登录页 -->
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.is_native.avtivity.LoginActivity"
             android:screenOrientation="portrait" />
         <!-- 短信验证登录 -->
         <activity
-            android:name=".ui.ShortmessageLoginActivity"
+            android:name=".ui.is_native.avtivity.ShortmessageLoginActivity"
             android:screenOrientation="portrait" />
         <!-- 忘记密码 -->
         <activity
-            android:name=".ui.ForgetPasswordActivity"
+            android:name=".ui.is_native.avtivity.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
         <!--注册业-->
         <activity
-            android:name=".ui.RegistActivity"
+            android:name=".ui.is_native.avtivity.RegistActivity"
             android:screenOrientation="portrait" />
 
         <!--公用的h5浏览界面，只做浏览功能，附带刷新功能-->
         <activity
-            android:name=".ui.LtzWebview"
+            android:name=".ui.is_h5.LtzWebview"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <!--原生主页-->
+        <activity
+            android:name=".ui.is_native.avtivity.HomeActivity"
+            android:theme="@style/MainActivityColorTranslucentTheme"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="QcCVZyvZnZk2E9ZPBTDZZPtdIPvDjGT0"/>

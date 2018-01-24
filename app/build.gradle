@@ -45,9 +45,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.trello:rxlifecycle-components:0.6.1'
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+
     compile 'com.facebook.stetho:stetho:1.3.1'
     compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
     compile 'com.lucenlee:countdownbutton:1.0.0'
@@ -59,9 +57,13 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.9'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
     /*权限库*/
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.0@aar'
     /*webview*/
     compile 'com.lcodecorex:tkrefreshlayout:1.0.4'
-
+    //自定义控件
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
+    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
 }

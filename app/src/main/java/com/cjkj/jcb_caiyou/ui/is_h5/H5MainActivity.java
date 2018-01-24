@@ -1,10 +1,9 @@
-package com.cjkj.jcb_caiyou.ui;
+package com.cjkj.jcb_caiyou.ui.is_h5;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.KeyEvent;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
@@ -18,20 +17,20 @@ import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.config.Constants;
 import com.cjkj.jcb_caiyou.location.RxLocation;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
+import com.cjkj.jcb_caiyou.ui.is_native.avtivity.LoginActivity;
 import com.cjkj.jcb_caiyou.util.SPUtil;
 import com.cjkj.jcb_caiyou.util.SnackbarUtil;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.Bind;
 import rx.Subscriber;
 /**
- * 主页
+ * 主页h5
  */
-public class MainActivity extends RxBaseActivity {
+public class H5MainActivity extends RxBaseActivity {
 
     private static Boolean isExit = false;
     @Bind(R.id.Webview)
@@ -39,7 +38,7 @@ public class MainActivity extends RxBaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.h5_activity_main;
     }
 
     @Override
@@ -99,7 +98,7 @@ public class MainActivity extends RxBaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ActivityManager.getInstance().finishAllActivityByWhitelist(MainActivity.class);
+        ActivityManager.getInstance().finishAllActivityByWhitelist(H5MainActivity.class);
     }
 
     @Override
@@ -107,7 +106,7 @@ public class MainActivity extends RxBaseActivity {
         //申请权限
         RxLocation
                 .get()
-                .locate(MainActivity.this).subscribe(new Subscriber<BDLocation>() {
+                .locate(H5MainActivity.this).subscribe(new Subscriber<BDLocation>() {
                 @Override
                 public void onCompleted() {
 
@@ -129,11 +128,13 @@ public class MainActivity extends RxBaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
-            mWebView.goBack();// 返回前一个页面
-            return true;
-        }else{
-            exitApp();
+        if (keyCode == KeyEvent.KEYCODE_BACK ) {
+            if (mWebView.canGoBack()) {
+                mWebView.goBack();// 返回前一个页面
+                return true;
+            } else {
+                exitApp();
+            }
         }
         return false;
     }
@@ -158,7 +159,7 @@ public class MainActivity extends RxBaseActivity {
 
         @JavascriptInterface
         public void GotoLogin(){
-            Intent i = new Intent(MainActivity.this,LoginActivity.class);
+            Intent i = new Intent(H5MainActivity.this,LoginActivity.class);
             startActivity(i);
         }
 	}

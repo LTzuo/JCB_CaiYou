@@ -1,18 +1,16 @@
-package com.cjkj.jcb_caiyou.ui;
+package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
-import com.cjkj.jcb_caiyou.contract.LoginContract;
-import com.cjkj.jcb_caiyou.presenter.LoginPressenter;
+import com.cjkj.jcb_caiyou.presenter.login.LoginContract;
+import com.cjkj.jcb_caiyou.presenter.login.LoginPressenter;
+import com.cjkj.jcb_caiyou.ui.is_h5.H5MainActivity;
 import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.lucenlee.countdownlibrary.CountdownButton;
@@ -72,8 +70,8 @@ public class ShortmessageLoginActivity extends RxBaseActivity implements LoginCo
 
     @Override
     public void LoginSussesful() {
-        ActivityManager.getInstance().finishActivity(MainActivity.class);
-        startActivity(new Intent(ShortmessageLoginActivity.this, MainActivity.class));
+        ActivityManager.getInstance().finishActivity(H5MainActivity.class);
+        startActivity(new Intent(ShortmessageLoginActivity.this, H5MainActivity.class));
     }
 
     @Override

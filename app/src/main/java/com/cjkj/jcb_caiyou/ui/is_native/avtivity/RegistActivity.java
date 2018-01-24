@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui;
+package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,8 @@ import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
-import com.cjkj.jcb_caiyou.presenter.RegistPresenter;
+import com.cjkj.jcb_caiyou.presenter.regist.RegistPresenter;
+import com.cjkj.jcb_caiyou.ui.is_h5.H5MainActivity;
 import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.cjkj.jcb_caiyou.util.WebUtils;
@@ -16,7 +17,7 @@ import com.lucenlee.countdownlibrary.CountdownButton;
 import com.mixiaoxiao.smoothcompoundbutton.SmoothCheckBox;
 import butterknife.Bind;
 import butterknife.OnClick;
-import com.cjkj.jcb_caiyou.contract.RegistContract.IRegistView;
+import com.cjkj.jcb_caiyou.presenter.regist.RegistContract.IRegistView;
 /**
  * 注册业
  */
@@ -36,8 +37,8 @@ public class RegistActivity extends RxBaseActivity implements IRegistView{
 
     @Override
     public void UserRegistSussenfuly() {
-        ActivityManager.getInstance().finishActivity(MainActivity.class);
-        startActivity(new Intent(RegistActivity.this, MainActivity.class));
+        ActivityManager.getInstance().finishActivity(H5MainActivity.class);
+        startActivity(new Intent(RegistActivity.this, H5MainActivity.class));
     }
 
     @Bind(R.id.checkbox)

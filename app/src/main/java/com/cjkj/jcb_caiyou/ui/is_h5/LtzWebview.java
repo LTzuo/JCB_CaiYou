@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui;
+package com.cjkj.jcb_caiyou.ui.is_h5;
 
 import android.content.Intent;
 import android.os.Bundle;

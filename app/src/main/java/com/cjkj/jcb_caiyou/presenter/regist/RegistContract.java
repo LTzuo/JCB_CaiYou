@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.contract;
+package com.cjkj.jcb_caiyou.presenter.regist;
 
 import com.cjkj.jcb_caiyou.base.BasePresenter;
 import com.cjkj.jcb_caiyou.base.BaseView;

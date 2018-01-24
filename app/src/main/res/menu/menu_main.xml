@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_news"
+        android:icon="@drawable/goucai"
+        android:title="购彩" />
+    <item
+        android:id="@+id/item_lib"
+        android:icon="@drawable/hemai"
+        android:title="合买" />
+    <item
+        android:id="@+id/item_find"
+        android:icon="@drawable/caidan"
+        android:title="服务" />
+    <item
+        android:id="@+id/item_more"
+        android:icon="@drawable/mine"
+        android:title="我的" />
+
+</menu>

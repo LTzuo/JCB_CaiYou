@@ -1,14 +1,11 @@
-package com.cjkj.jcb_caiyou.ui;
+package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.cjkj.jcb_caiyou.CaiYouApp;
 import com.cjkj.jcb_caiyou.R;
-import com.cjkj.jcb_caiyou.network.ApiConstants;
-import com.cjkj.jcb_caiyou.util.PreferenceUtil;
+import com.cjkj.jcb_caiyou.ui.is_h5.H5MainActivity;
 import com.cjkj.jcb_caiyou.util.SystemUiVisibilityUtil;
-import com.cjkj.jcb_caiyou.util.WebUtils;
 import com.trello.rxlifecycle.components.RxActivity;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
@@ -36,7 +33,8 @@ public class WelcomeActivity extends RxActivity {
     private void finishTask() {
 //        boolean isLogin = PreferenceUtil.getBoolean(ConstantUtil.KEY, false);
 //        if (isLogin) {
-             startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+             //startActivity(new Intent(WelcomeActivity.this, H5MainActivity.class));
+             startActivity(new Intent(WelcomeActivity.this, HomeActivity.class));
 //        } else {
 //            startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
 //        }

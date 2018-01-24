@@ -1,12 +1,10 @@
-package com.cjkj.jcb_caiyou.presenter;
+package com.cjkj.jcb_caiyou.presenter.login;
 
 import android.util.Log;
 import com.cjkj.jcb_caiyou.CaiYouApp;
 import com.cjkj.jcb_caiyou.config.Constants;
-import com.cjkj.jcb_caiyou.contract.LoginContract;
-import com.cjkj.jcb_caiyou.contract.LoginContract.ILoginPressenter;
-import com.cjkj.jcb_caiyou.contract.LoginContract.ILogView;
-import com.cjkj.jcb_caiyou.contract.RegistContract;
+import com.cjkj.jcb_caiyou.presenter.login.LoginContract.ILoginPressenter;
+import com.cjkj.jcb_caiyou.presenter.login.LoginContract.ILogView;
 import com.cjkj.jcb_caiyou.network.RetrofitHelper;
 import com.cjkj.jcb_caiyou.util.AppValidationMgr;
 import com.cjkj.jcb_caiyou.util.SPUtil;
