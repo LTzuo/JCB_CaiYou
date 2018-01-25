@@ -80,6 +80,12 @@
         <activity
             android:name=".ui.is_native.avtivity.HomeActivity"
             android:theme="@style/MainActivityColorTranslucentTheme"/>
+        <!--更多彩种-->
+        <activity
+            android:name=".ui.is_native.avtivity.MoreLotteryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="QcCVZyvZnZk2E9ZPBTDZZPtdIPvDjGT0"/>

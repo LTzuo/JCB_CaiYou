@@ -1,5 +1,6 @@
 package com.cjkj.jcb_caiyou.ui.is_native.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,7 +16,9 @@ import com.cjkj.jcb_caiyou.base.RxLazyFragment;
 import com.cjkj.jcb_caiyou.entity.lottery.PictureModel;
 import com.cjkj.jcb_caiyou.presenter.lottery.LotteryContract;
 import com.cjkj.jcb_caiyou.presenter.lottery.LotteryPresenter;
+import com.cjkj.jcb_caiyou.ui.is_native.avtivity.MoreLotteryActivity;
 import com.cjkj.jcb_caiyou.util.GlideImageLoader;
+import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -121,7 +124,7 @@ public class LotteryFragment extends RxLazyFragment implements LotteryContract.I
                     ToastUtil.ShortToast("竞彩足球");
                     break;
                 case 8:
-                    ToastUtil.ShortToast("更多彩种");
+                    IntentUtils.Goto(getActivity(), MoreLotteryActivity.class,"聚彩宝");
                     break;
             }
             });
