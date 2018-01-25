@@ -17,11 +17,9 @@ public class IntentUtils {
      * 页面跳转
      * @param context
      * @param clzz
-     * @param title
      */
-    public static void Goto(Activity context, Class<?> clzz , String title) {
+    public static void Goto(Activity context, Class<?> clzz) {
         Intent intent = new Intent(context, clzz);
-        intent.putExtra("title",title) ;
         context.startActivity(intent);
     }
 }

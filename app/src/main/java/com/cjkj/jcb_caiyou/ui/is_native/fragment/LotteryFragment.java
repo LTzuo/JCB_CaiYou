@@ -1,13 +1,9 @@
 package com.cjkj.jcb_caiyou.ui.is_native.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 import com.cjkj.jcb_caiyou.R;
@@ -16,7 +12,8 @@ import com.cjkj.jcb_caiyou.base.RxLazyFragment;
 import com.cjkj.jcb_caiyou.entity.lottery.PictureModel;
 import com.cjkj.jcb_caiyou.presenter.lottery.LotteryContract;
 import com.cjkj.jcb_caiyou.presenter.lottery.LotteryPresenter;
-import com.cjkj.jcb_caiyou.ui.is_native.avtivity.MoreLotteryActivity;
+import com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery.MoreLotteryActivity;
+import com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery.SSQ_LotteryActivity;
 import com.cjkj.jcb_caiyou.util.GlideImageLoader;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
@@ -100,7 +97,7 @@ public class LotteryFragment extends RxLazyFragment implements LotteryContract.I
         mLotteryAdapter.setOnItemClickListener((position, holder) -> {
             switch (position) {
                 case 0:
-                    ToastUtil.ShortToast("双色球");
+                   IntentUtils.Goto(getActivity(),SSQ_LotteryActivity.class);
                     break;
                 case 1:
                     ToastUtil.ShortToast("3D");
@@ -124,7 +121,7 @@ public class LotteryFragment extends RxLazyFragment implements LotteryContract.I
                     ToastUtil.ShortToast("竞彩足球");
                     break;
                 case 8:
-                    IntentUtils.Goto(getActivity(), MoreLotteryActivity.class,"聚彩宝");
+                    IntentUtils.Goto(getActivity(), MoreLotteryActivity.class);
                     break;
             }
             });

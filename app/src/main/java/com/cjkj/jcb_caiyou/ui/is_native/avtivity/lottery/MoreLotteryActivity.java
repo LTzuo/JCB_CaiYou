@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
+package com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,8 +23,6 @@ public class MoreLotteryActivity extends RxBaseActivity{
 
     MoreLotteryAdapter mLotteryAdapter;
 
-    String title ;
-
     @Override
     public int getLayoutId() {
         return R.layout.activity_morelottery;
@@ -32,7 +30,6 @@ public class MoreLotteryActivity extends RxBaseActivity{
 
     @Override
     public void initViews(Bundle savedInstanceState) {
-        title = getIntent().getStringExtra("title");
         mLotteryAdapter = new MoreLotteryAdapter(mRecyclerView);
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -41,7 +38,7 @@ public class MoreLotteryActivity extends RxBaseActivity{
 
     @Override
     public void initToolBar() {
-        mToolbar.setTitle(title);// 标题的文字需在setSupportActionBar之前，不然会无效
+        mToolbar.setTitle("聚彩宝");// 标题的文字需在setSupportActionBar之前，不然会无效
         mToolbar.setNavigationIcon(R.drawable.ic_back_white);
         setSupportActionBar(mToolbar);
         mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
