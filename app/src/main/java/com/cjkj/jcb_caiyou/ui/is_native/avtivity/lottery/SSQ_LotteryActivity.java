@@ -1,8 +1,6 @@
 package com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,22 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_BuleBallAdapter;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_RedBallAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.sensor.ShakeSensor;
-import com.cjkj.jcb_caiyou.util.ToastUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
-
 /**
  * 双色球
  * author:linliang
@@ -139,6 +130,7 @@ public class SSQ_LotteryActivity extends RxBaseActivity implements ShakeSensor.o
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (isSensorRegist)
         mShakeSensor.unRegisterListener();
     }
 
