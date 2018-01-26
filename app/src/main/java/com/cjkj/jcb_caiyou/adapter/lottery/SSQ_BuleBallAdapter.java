@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
-import com.cjkj.jcb_caiyou.util.Utils;
+import com.cjkj.jcb_caiyou.util.LotteryAlgorithmUtils;
 
 /**
  * 双色球-篮球 适配器
@@ -39,16 +39,31 @@ public class SSQ_BuleBallAdapter extends AbsRecyclerViewAdapter {
         notifyDataSetChanged();
     }
 
+    /**
+     * 摇一摇随机出n个篮球
+     */
     public void Random() {
         for (int i = 0; i <= itemChoice.length - 1; i++) {
             itemChoice[i] = false;
         }
-        int[] random = Utils.randomCommon(0, itemNames.length+1, 1);
+        int[] random = LotteryAlgorithmUtils.randomCommon(0, itemNames.length+1, 1);
         StringBuffer buffer = new StringBuffer();
         for (int index : random) {
             itemChoice[index-1] = true;
         }
         notifyDataSetChanged();
+    }
+
+    /**
+     * 获取蓝球选择个数
+     * @return
+     */
+    public int getBallCount(){
+        int count =0;
+        for(boolean b : itemChoice){
+            if(b) count ++;
+        }
+        return count;
     }
 
     @Override
