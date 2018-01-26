@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
+package com.cjkj.jcb_caiyou.ui.is_native;
 
 import android.content.Intent;
 import android.os.Bundle;

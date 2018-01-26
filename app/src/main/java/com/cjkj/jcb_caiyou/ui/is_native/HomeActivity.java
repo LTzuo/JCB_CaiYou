@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
+package com.cjkj.jcb_caiyou.ui.is_native;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.pager.HomeViewPagerAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
-import com.cjkj.jcb_caiyou.ui.is_native.fragment.LotteryFragment;
+import com.cjkj.jcb_caiyou.ui.is_native.lottery.LotteryFragment;
 import com.cjkj.jcb_caiyou.util.SnackbarUtil;
 import com.cjkj.jcb_caiyou.widget.tabbarhelper.BottomNavigationViewHelper;
 import com.cjkj.jcb_caiyou.widget.tabbarhelper.NoScrollViewPager;

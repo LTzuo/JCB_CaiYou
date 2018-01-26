@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.is_native.lottery.SSQ.SSQ_LotteryActivity">
+        <!--自定义toolbar-->
+        <include layout="@layout/toolbar_custom" />
+
+        <com.cjkj.jcb_caiyou.widget.tabbarhelper.NoScrollViewPager
+            android:id="@+id/mViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
+
+</LinearLayout>

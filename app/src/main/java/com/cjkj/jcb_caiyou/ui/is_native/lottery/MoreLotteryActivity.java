@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery;
+package com.cjkj.jcb_caiyou.ui.is_native.lottery;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -9,6 +9,7 @@ import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.adapter.lottery.MoreLotteryAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.ui.is_native.lottery.SSQ.SSQ_LotteryActivity;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
 
 import butterknife.Bind;

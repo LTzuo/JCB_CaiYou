@@ -33,4 +33,37 @@ public class Utils {
         }
         return result;
     }
+
+    /**
+     * 获取组合可能性
+     * @param ballCount 球数
+     * @param standCount 标准数
+     * @return
+     */
+    public static long getCountNumForBalls(int ballCount,int standCount){
+        long a=ballCount;
+        long b=1;
+        for(int i=1;i<standCount;i++){
+            a=a*(--ballCount);
+            b=b*(i+1);
+        }
+        return a/b;
+    }
+
+    /**
+     * 获取排列可能性
+     * @param ballCount
+     * @param i
+     * @return
+     */
+    public static long getCountNumForAllBalls(int ballCount, int CotSum)
+    {
+        long sum=1;
+        for(int i=0;i<CotSum;i++){
+            sum=sum*ballCount;
+            ballCount--;
+        }
+        return sum;
+    }
+
 }

@@ -1,10 +1,9 @@
-package com.cjkj.jcb_caiyou.ui.is_native.avtivity;
+package com.cjkj.jcb_caiyou.ui.is_native;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.cjkj.jcb_caiyou.R;
-import com.cjkj.jcb_caiyou.ui.is_h5.H5MainActivity;
 import com.cjkj.jcb_caiyou.util.SystemUiVisibilityUtil;
 import com.trello.rxlifecycle.components.RxActivity;
 import java.util.concurrent.TimeUnit;

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:background="@color/white"
-    tools:context=".ui.is_native.avtivity.LoginActivity">
+    tools:context=".ui.is_native.LoginActivity">
 
     <ImageView
         android:id="@+id/splash_default_iv"

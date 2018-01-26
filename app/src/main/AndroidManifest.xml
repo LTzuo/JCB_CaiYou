@@ -48,7 +48,7 @@
 
         <!-- 欢迎页 -->
         <activity
-            android:name=".ui.is_native.avtivity.WelcomeActivity"
+            android:name=".ui.is_native.WelcomeActivity"
             android:theme="@style/ColorTranslucentTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -58,19 +58,19 @@
         </activity>
         <!-- 登录页 -->
         <activity
-            android:name=".ui.is_native.avtivity.LoginActivity"
+            android:name=".ui.is_native.LoginActivity"
             android:screenOrientation="portrait" />
         <!-- 短信验证登录 -->
         <activity
-            android:name=".ui.is_native.avtivity.ShortmessageLoginActivity"
+            android:name=".ui.is_native.ShortmessageLoginActivity"
             android:screenOrientation="portrait" />
         <!-- 忘记密码 -->
         <activity
-            android:name=".ui.is_native.avtivity.ForgetPasswordActivity"
+            android:name=".ui.is_native.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
         <!-- 注册业 -->
         <activity
-            android:name=".ui.is_native.avtivity.RegistActivity"
+            android:name=".ui.is_native.RegistActivity"
             android:screenOrientation="portrait" />
 
         <!-- 公用的h5浏览界面，只做浏览功能，附带刷新功能 -->
@@ -81,17 +81,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <!-- 原生主页 -->
         <activity
-            android:name=".ui.is_native.avtivity.HomeActivity"
+            android:name=".ui.is_native.HomeActivity"
             android:theme="@style/MainActivityColorTranslucentTheme" />
         <!-- 更多彩种 -->
         <activity
-            android:name=".ui.is_native.avtivity.lottery.MoreLotteryActivity"
+            android:name=".ui.is_native.lottery.MoreLotteryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--双色球-->
         <activity
-            android:name=".ui.is_native.avtivity.lottery.SSQ_LotteryActivity"
+            android:name=".ui.is_native.lottery.SSQ.SSQ_LotteryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>

@@ -17,7 +17,7 @@ import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.config.Constants;
 import com.cjkj.jcb_caiyou.location.RxLocation;
 import com.cjkj.jcb_caiyou.network.ApiConstants;
-import com.cjkj.jcb_caiyou.ui.is_native.avtivity.LoginActivity;
+import com.cjkj.jcb_caiyou.ui.is_native.LoginActivity;
 import com.cjkj.jcb_caiyou.util.SPUtil;
 import com.cjkj.jcb_caiyou.util.SnackbarUtil;
 import com.cjkj.jcb_caiyou.util.ToastUtil;

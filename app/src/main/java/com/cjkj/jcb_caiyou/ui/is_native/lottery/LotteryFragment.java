@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.ui.is_native.fragment;
+package com.cjkj.jcb_caiyou.ui.is_native.lottery;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,8 +12,7 @@ import com.cjkj.jcb_caiyou.base.RxLazyFragment;
 import com.cjkj.jcb_caiyou.entity.lottery.PictureModel;
 import com.cjkj.jcb_caiyou.presenter.lottery.LotteryContract;
 import com.cjkj.jcb_caiyou.presenter.lottery.LotteryPresenter;
-import com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery.MoreLotteryActivity;
-import com.cjkj.jcb_caiyou.ui.is_native.avtivity.lottery.SSQ_LotteryActivity;
+import com.cjkj.jcb_caiyou.ui.is_native.lottery.SSQ.SSQ_LotteryActivity;
 import com.cjkj.jcb_caiyou.util.GlideImageLoader;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
