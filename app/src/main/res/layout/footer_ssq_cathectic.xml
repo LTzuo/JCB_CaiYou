@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:orientation="vertical">
+
+    <com.cjkj.jcb_caiyou.widget.DashLineView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        android:layerType="software" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:textColor="@color/gray_20"
+            android:text="我已阅读并同意"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:layout_weight="1"
+            android:textColor="@color/red_liget"
+            android:text="《用户服务协议》"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/gray_20"
+            android:src="@drawable/lottery_delete"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_20"
+            android:textSize="10dp"
+            android:text="清空"/>
+    </LinearLayout>
+
+    <com.cjkj.jcb_caiyou.widget.CouponImageView
+        android:layout_width="match_parent"
+        android:layout_height="7dp"
+        android:orientation="horizontal"
+        android:scaleType="centerCrop"
+        app:cv_dash_line_color="@color/all_background"
+        app:cv_dash_line_gap="0dp"
+        app:cv_dash_line_height="0dp"
+        app:cv_dash_line_length="0dp"
+        app:cv_is_dash_line_bottom="false"
+        app:cv_is_dash_line_left="false"
+        app:cv_is_dash_line_right="false"
+        app:cv_is_dash_line_top="false"
+        app:cv_is_semicircle_bottom="true"
+        app:cv_is_semicircle_left="false"
+        app:cv_is_semicircle_right="false"
+        app:cv_is_semicircle_top="false"
+        app:cv_semicircle_color="@color/all_background"
+        app:cv_semicircle_gap="1dp"
+        app:cv_semicircle_radius="3dp" />
+</LinearLayout>

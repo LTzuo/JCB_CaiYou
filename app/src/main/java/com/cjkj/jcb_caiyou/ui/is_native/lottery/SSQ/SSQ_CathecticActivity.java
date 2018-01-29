@@ -6,17 +6,20 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_CathecticAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.entity.lottery.SSQ.SSQEntity;
+import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.cjkj.jcb_caiyou.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * 双色球投注界面
@@ -32,6 +35,17 @@ public class SSQ_CathecticActivity extends RxBaseActivity {
 
     List<SSQEntity> mDatas = new ArrayList<>();
 
+    @OnClick({R.id.random_1,R.id.random_5,R.id.random_10})
+    public void BtnClick(View v){
+        if(v.getId() == R.id.random_1){
+            ToastUtil.ShortToast("机选1注");
+        }else if(v.getId() == R.id.random_5){
+            ToastUtil.ShortToast("机选5注");
+        }else if(v.getId() == R.id.random_10){
+            ToastUtil.ShortToast("机选10注");
+        }
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_ssq__cathectic;
@@ -44,33 +58,11 @@ public class SSQ_CathecticActivity extends RxBaseActivity {
         mRecyclerView.setAdapter(mSSQ_CathecticAdapter);
         //设置分割线
         mRecyclerView.addItemDecoration(new RecycleViewDivider());
-
         mDatas.add(new SSQEntity("01 02 03 04 05 06 19 29 30 31 32 33", "01 02 03 04 05 06 07 08 09", "1", "2"));
-        mDatas.add(new SSQEntity("01 03 05 07 11 18", "06", "1", "2"));
-        mDatas.add(new SSQEntity("03 04 05 06 11 16 17", "05 06", "1", "2"));
-        mDatas.add(new SSQEntity("05 06 11 16 17 22 30", "12", "1", "2"));
-        mDatas.add(new SSQEntity("06 11 16 17 22 30 33", "16", "1", "2"));
-        mDatas.add(new SSQEntity("06 11 16 17 22 30 31", "15", "1", "2"));
-        mDatas.add(new SSQEntity("11 16 17 22 26 29", "01 02 03 04 05 06", "1", "2"));
         mDatas.add(new SSQEntity("01 02 03 04 05 06 19 29 30 31 32 33", "01 02 03 04 05 06 07 08 09", "1", "2"));
-        mDatas.add(new SSQEntity("01 03 05 07 11 18", "06", "1", "2"));
-        mDatas.add(new SSQEntity("03 04 05 06 11 16 17", "05 06", "1", "2"));
-        mDatas.add(new SSQEntity("05 06 11 16 17 22 30", "12", "1", "2"));
         mDatas.add(new SSQEntity("06 11 16 17 22 30 33", "16", "1", "2"));
         mDatas.add(new SSQEntity("06 11 16 17 22 30 31", "15", "1", "2"));
         mDatas.add(new SSQEntity("11 16 17 22 26 29", "01 02 03 04 05 06", "1", "2"));
-        mDatas.add(new SSQEntity("05 06 11 16 17 22 30", "12", "1", "2"));
-        mDatas.add(new SSQEntity("06 11 16 17 22 30 33", "16", "1", "2"));
-        mDatas.add(new SSQEntity("06 11 16 17 22 30 31", "15", "1", "2"));
-        mDatas.add(new SSQEntity("11 16 17 22 26 29", "01 02 03 04 05 06", "1", "2"));
-        mDatas.add(new SSQEntity("01 02 03 04 05 06 19 29 30 31 32 33", "01 02 03 04 05 06 07 08 09", "1", "2"));
-        mDatas.add(new SSQEntity("01 03 05 07 11 18", "06", "1", "2"));
-        mDatas.add(new SSQEntity("03 04 05 06 11 16 17", "05 06", "1", "2"));
-        mDatas.add(new SSQEntity("05 06 11 16 17 22 30", "12", "1", "2"));
-        mDatas.add(new SSQEntity("06 11 16 17 22 30 33", "16", "1", "2"));
-        mDatas.add(new SSQEntity("06 11 16 17 22 30 31", "15", "1", "2"));
-        mDatas.add(new SSQEntity("11 16 17 22 26 29", "01 02 03 04 05 06", "1", "2"));
-
         mSSQ_CathecticAdapter.setInfo(mDatas);
         mSSQ_CathecticAdapter.notifyDataSetChanged();
     }

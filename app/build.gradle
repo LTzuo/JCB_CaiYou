@@ -75,4 +75,6 @@ dependencies {
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     compile 'com.sflin:csstextview:1.0.0'
     compile 'com.github.jiang111:IndicatorDialog:v1.3.8'
+    //锯齿边缘view
+    compile 'com.github.dongjunkun:CouponView:1.0.4'
 }

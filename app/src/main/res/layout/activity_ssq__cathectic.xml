@@ -13,10 +13,27 @@
         layout="@layout/inclde_ssqlottery_cathectic"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="底部"/>
+   <FrameLayout
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:background="@color/white"
+       android:layout_gravity="bottom"
+       >
+       <TextView
+           android:id="@+id/next"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="15dp"
+           android:layout_gravity="right|center_vertical"
+           android:background="@drawable/lottery_next_btn_bg"
+           android:gravity="center"
+           android:paddingTop="5dp"
+           android:paddingBottom="5dp"
+           android:paddingLeft="10dp"
+           android:paddingRight="10dp"
+           android:textSize="16dp"
+           android:text="下一步"
+           android:textColor="@color/white" />
+   </FrameLayout>
 
 </FrameLayout>

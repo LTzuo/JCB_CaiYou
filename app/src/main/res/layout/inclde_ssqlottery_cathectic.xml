@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="50dp"
+    android:layout_marginBottom="50dp"
     >
 
     <LinearLayout
@@ -16,6 +17,7 @@
         android:layout_marginRight="15dp"
         android:orientation="horizontal">
         <TextView
+            android:id="@+id/random_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="7dp"
@@ -25,15 +27,17 @@
             android:layout_weight="1"
             android:text="+机选1注"/>
         <TextView
+            android:id="@+id/random_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:padding="7dp"
             android:layout_margin="5dp"
+            android:background="@color/white"
             android:gravity="center"
             android:layout_weight="1"
             android:text="+机选5注"/>
         <TextView
+            android:id="@+id/random_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -54,27 +58,12 @@
         android:id="@+id/mSSQCathectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:paddingTop="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@color/white"
         android:overScrollMode="never"
         />
 
-    <com.cjkj.jcb_caiyou.widget.DashLineView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/white"
-        android:layerType="software"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="用户协议"
-        android:padding="10dp"/>
+
 </LinearLayout>
