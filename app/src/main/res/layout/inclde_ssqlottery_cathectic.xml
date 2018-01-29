@@ -10,7 +10,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
@@ -40,14 +43,38 @@
             android:layout_weight="1"
             android:text="+机选10注"/>
     </LinearLayout>
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:background="@drawable/extraction_header"
+        />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mSSQCathectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@color/white"
+        android:overScrollMode="never"
         />
 
+    <com.cjkj.jcb_caiyou.widget.DashLineView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/white"
+        android:layerType="software"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="用户协议"
+        android:padding="10dp"/>
 </LinearLayout>

@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
+import com.cjkj.jcb_caiyou.entity.lottery.SSQ.SSQEntity;
+import com.sflin.csstextview.CSSTextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +19,9 @@ import java.util.List;
  */
 public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
 
-    private List<String> mDatas = new ArrayList<>();
+    private List<SSQEntity> mDatas = new ArrayList<>();
 
-    public void setInfo(List<String> datas) {
+    public void setInfo(List<SSQEntity> datas) {
         this.mDatas = datas;
     }
 
@@ -37,7 +40,8 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
     public void onBindViewHolder(ClickableViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            itemViewHolder.mItemText.setText(mDatas.get(position));
+            itemViewHolder.mItemText.setText(mDatas.get(position).getRedBall()+" "+mDatas.get(position).getBuleBall());
+            itemViewHolder.mItemText.setTextArrColor(" "+mDatas.get(position).getBuleBall(),getContext().getResources().getColor(R.color.blue));
         }
         super.onBindViewHolder(holder, position);
     }
@@ -49,7 +53,7 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
 
     public class ItemViewHolder extends ClickableViewHolder {
 
-        public TextView mItemText;
+        public CSSTextView mItemText;
 
         public ItemViewHolder(View itemView) {
             super(itemView);
