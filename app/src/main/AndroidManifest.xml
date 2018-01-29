@@ -29,8 +29,8 @@
     <!-- SD卡读取权限，用户写入离线定位数据 -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!--摇一注振动权限-->
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <!-- 摇一注振动权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".CaiYouApp"
@@ -89,12 +89,18 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--双色球-->
+        <!-- 双色球 -->
         <activity
             android:name=".ui.is_native.lottery.SSQ.SSQ_LotteryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!--双色球投注界面-->
+        <activity
+            android:name=".ui.is_native.lottery.SSQ.SSQ_CathecticActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="QcCVZyvZnZk2E9ZPBTDZZPtdIPvDjGT0" />

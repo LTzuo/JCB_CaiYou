@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.adapter;
+package com.cjkj.jcb_caiyou.adapter.indicatordialog;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

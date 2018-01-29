@@ -12,14 +12,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
-import com.cjkj.jcb_caiyou.adapter.IndicatorDialogAdapter;
+import com.cjkj.jcb_caiyou.adapter.indicatordialog.IndicatorDialogAdapter;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.adapter.indicatordialog.IndicatorDialogViewHolder;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_BuleBallAdapter;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_RedBallAdapter;
 import com.cjkj.jcb_caiyou.base.RxLazyFragment;
 import com.cjkj.jcb_caiyou.sensor.ShakeSensor;
-import com.cjkj.jcb_caiyou.util.DecCalUtil;
+import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.LotteryAlgorithmUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.jiang.android.indicatordialog.IndicatorBuilder;
@@ -78,7 +78,7 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
                 isSensorRegist = true;
             }
         }else if(v.getId() == R.id.next){
-             ToastUtil.ShortToast("下一步");
+            IntentUtils.Goto(getActivity(),SSQ_CathecticActivity.class);
         }else if(v.getId() == R.id.tv_random){
             showBottomDialog(v, 0.1f, IndicatorBuilder.GRAVITY_LEFT);
         }
