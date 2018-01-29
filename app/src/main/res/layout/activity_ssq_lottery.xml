@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/all_background"
     android:orientation="vertical"
     tools:context=".ui.is_native.lottery.SSQ.SSQ_LotteryActivity">
         <!--自定义toolbar-->

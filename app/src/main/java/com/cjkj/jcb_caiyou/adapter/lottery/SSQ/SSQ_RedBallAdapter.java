@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.adapter.lottery;
+package com.cjkj.jcb_caiyou.adapter.lottery.SSQ;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,22 +11,26 @@ import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.util.LotteryAlgorithmUtils;
 
 /**
- * 双色球-篮球 适配器
+ * 双色球-红球 适配器
  * Created by 1 on 2018/1/25.
  */
-public class SSQ_BuleBallAdapter extends AbsRecyclerViewAdapter {
+public class SSQ_RedBallAdapter extends AbsRecyclerViewAdapter {
 
     private String[] itemNames = new String[]{
-            "01", "02", "03", "04", "05", "06", "07", "08",
-            "09", "10", "11", "12", "13", "14", "15", "16"
+            "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+            "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+            "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+            "31", "32", "33"
     };
 
     private boolean[] itemChoice = new boolean[]{
-            false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false
+            false, false, false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false, false, false,
+            false, false, false
     };
 
-    public SSQ_BuleBallAdapter(RecyclerView recyclerView) {
+    public SSQ_RedBallAdapter(RecyclerView recyclerView) {
         super(recyclerView);
     }
 
@@ -40,13 +44,13 @@ public class SSQ_BuleBallAdapter extends AbsRecyclerViewAdapter {
     }
 
     /**
-     * 摇一摇随机出n个篮球
+     * 摇一摇随机n个不相同的红球
      */
     public void Random() {
         for (int i = 0; i <= itemChoice.length - 1; i++) {
             itemChoice[i] = false;
         }
-        int[] random = LotteryAlgorithmUtils.randomCommon(0, itemNames.length+1, 1);
+        int[] random = LotteryAlgorithmUtils.randomCommon(0, itemNames.length+1, 6);
         StringBuffer buffer = new StringBuffer();
         for (int index : random) {
             itemChoice[index-1] = true;
@@ -55,35 +59,45 @@ public class SSQ_BuleBallAdapter extends AbsRecyclerViewAdapter {
     }
 
     /**
-     * 获取蓝球选择个数
+     * 获取红球选择个数
      * @return
      */
     public int getBallCount(){
         int count =0;
-        for(boolean b : itemChoice){
+        for(boolean b:itemChoice){
             if(b) count ++;
         }
         return count;
     }
 
+    /**
+     * 清空已选中的球
+     */
+    public void clear(){
+        for (int i = 0; i <= itemChoice.length - 1; i++) {
+            itemChoice[i] = false;
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
-    public ClickableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AbsRecyclerViewAdapter.ClickableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         bindContext(parent.getContext());
         return new ItemViewHolder(
-                LayoutInflater.from(getContext()).inflate(R.layout.item_lottery_blueball, parent, false));
+                LayoutInflater.from(getContext()).inflate(R.layout.item_lottery_redball, parent, false));
     }
 
 
     @Override
-    public void onBindViewHolder(ClickableViewHolder holder, int position) {
+    public void onBindViewHolder(AbsRecyclerViewAdapter.ClickableViewHolder holder, int position) {
         if (holder instanceof ItemViewHolder) {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             itemViewHolder.mItemText.setText(itemNames[position]);
             if (itemChoice[position]) {
                 itemViewHolder.mItemText.setTextColor(getContext().getResources().getColor(R.color.white));
-                itemViewHolder.mItemText.setBackground(getContext().getResources().getDrawable(R.drawable.lottery_buleball_xz));
+                itemViewHolder.mItemText.setBackground(getContext().getResources().getDrawable(R.drawable.lottery_redball_xz));
             } else {
-                itemViewHolder.mItemText.setTextColor(getContext().getResources().getColor(R.color.blue));
+                itemViewHolder.mItemText.setTextColor(getContext().getResources().getColor(R.color.red_liget));
                 itemViewHolder.mItemText.setBackground(getContext().getResources().getDrawable(R.drawable.lottery_ball_wxz));
             }
         }
@@ -97,7 +111,7 @@ public class SSQ_BuleBallAdapter extends AbsRecyclerViewAdapter {
     }
 
 
-    public class ItemViewHolder extends ClickableViewHolder {
+    public class ItemViewHolder extends AbsRecyclerViewAdapter.ClickableViewHolder {
 
         public TextView mItemText;
 

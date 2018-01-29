@@ -15,8 +15,8 @@ import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.indicatordialog.IndicatorDialogAdapter;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.adapter.indicatordialog.IndicatorDialogViewHolder;
-import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_BuleBallAdapter;
-import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_RedBallAdapter;
+import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_BuleBallAdapter;
+import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_RedBallAdapter;
 import com.cjkj.jcb_caiyou.base.RxLazyFragment;
 import com.cjkj.jcb_caiyou.sensor.ShakeSensor;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
@@ -25,10 +25,8 @@ import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.jiang.android.indicatordialog.IndicatorBuilder;
 import com.jiang.android.indicatordialog.IndicatorDialog;
 import com.sflin.csstextview.CSSTextView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.OnClick;
 
@@ -48,6 +46,10 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
     TextView tv_yyy;
     @Bind(R.id.content_text)
     CSSTextView mCSSTextView;
+    @Bind(R.id.img_dele)
+    ImageView img_dele;
+    @Bind(R.id.tv_random)
+    TextView tv_random;
 
     private ShakeSensor mShakeSensor;//传感器
     private Vibrator mVibrator;//震动效果
@@ -63,7 +65,7 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
         return new SSQ_NormalFragment();
     }
 
-    @OnClick({R.id.layout_yyy,R.id.next,R.id.tv_random})
+    @OnClick({R.id.layout_yyy,R.id.next,R.id.tv_random,R.id.img_dele})
     public void BtnClick(View v) {
         if (v.getId() == R.id.layout_yyy) {
             if (isSensorRegist) {
@@ -79,8 +81,13 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
             }
         }else if(v.getId() == R.id.next){
             IntentUtils.Goto(getActivity(),SSQ_CathecticActivity.class);
+            getActivity().finish();
         }else if(v.getId() == R.id.tv_random){
             showBottomDialog(v, 0.1f, IndicatorBuilder.GRAVITY_LEFT);
+        }else if(v.getId() == R.id.img_dele){
+            mRedBallAdapter.clear();
+            mBuleBallAdapter.clear();
+            Calculation();
         }
     }
 
@@ -197,6 +204,12 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
             mCSSTextView.setTextArrColor("共",getResources().getColor(R.color.background_dark));
             mCSSTextView.setTextArrColor("注",getResources().getColor(R.color.background_dark));
             mCSSTextView.setTextArrColor("元",getResources().getColor(R.color.background_dark));
+            img_dele.setVisibility(View.VISIBLE);
+            tv_random.setVisibility(View.GONE);
+        }else{
+            mCSSTextView.setText(null);
+            img_dele.setVisibility(View.GONE);
+            tv_random.setVisibility(View.VISIBLE);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.cjkj.jcb_caiyou.adapter.lottery;
+package com.cjkj.jcb_caiyou.adapter.lottery.SSQ;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

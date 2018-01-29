@@ -94,4 +94,6 @@
 
     <color name="tab_checked">#D2142E</color>
     <color name="tab_unchecked">#999999</color>
+
+    <color name="all_background">#f5f4f9</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.cjkj.jcb_caiyou.base;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
@@ -76,6 +77,21 @@ public abstract class RxBaseActivity extends RxAppCompatActivity {
      * 设置数据显示
      */
     public void finishTask() {
+    }
+
+    /**
+     * Toolbar 返回事件
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

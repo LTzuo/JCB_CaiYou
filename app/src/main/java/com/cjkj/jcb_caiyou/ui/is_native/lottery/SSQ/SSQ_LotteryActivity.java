@@ -2,7 +2,6 @@ package com.cjkj.jcb_caiyou.ui.is_native.lottery.SSQ;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
-import com.cjkj.jcb_caiyou.adapter.lottery.SSQ_ViewPagerAdapter;
+import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_ViewPagerAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.cjkj.jcb_caiyou.widget.tabbarhelper.NoScrollViewPager;
@@ -79,16 +78,6 @@ public class SSQ_LotteryActivity extends RxBaseActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                this.finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
