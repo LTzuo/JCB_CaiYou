@@ -94,6 +94,16 @@ public class LotteryAlgorithmUtils {
                 count++;
             }
         }
+       //冒泡排序
+        for (int k = 0; k < result.length - 1; k++) {
+            for (int j = k + 1; j < result.length; j++) { // 升序把<改成>
+                 if (result[k] > result[j]) {
+                    int temp = result[k];
+                    result[k] = result[j];
+                    result[j] = temp;
+                }
+            }
+        }
         return result;
     }
 

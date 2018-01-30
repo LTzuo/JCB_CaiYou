@@ -5,10 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.entity.lottery.SSQ.SSQEntity;
+import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.sflin.csstextview.CSSTextView;
 
 import java.util.ArrayList;
@@ -20,8 +22,8 @@ import java.util.List;
  */
 public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
 
-    private static final int ITEM_TYPE_HEADER = 1;
-    private static final int ITEM_TYPE_FOOTER = 2;
+    public static final int ITEM_TYPE_HEADER = 1;
+    public static final int ITEM_TYPE_FOOTER = 2;
 
 //    public interface OnItemDeleListener{
 //        void onItemDele(int position);
@@ -57,6 +59,14 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
             notifyItemRemoved(holder.getAdapterPosition());
     }
 
+    /**
+     * 清空数据
+     */
+    public void clearData() {
+        mDatas.clear();
+        notifyDataSetChanged();
+    }
+
     public SSQ_CathecticAdapter(RecyclerView recyclerView){
         super(recyclerView);
     }
@@ -83,12 +93,17 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
 //        } else
         if (holder instanceof FootHolder) {
             FootHolder footHolder = (FootHolder) holder;
-           // footHolder.textViewFoot.setText("这是底部，哈哈哈");
+            footHolder.layout_deleAll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clearData();
+                }
+            });
         }
         else {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
-            itemViewHolder.mItemText.setText(mDatas.get(position).getRedBall()+" "+mDatas.get(position).getBuleBall());
-            itemViewHolder.mItemText.setTextArrColor(" "+mDatas.get(position).getBuleBall(),getContext().getResources().getColor(R.color.blue));
+            itemViewHolder.mItemText.setText(mDatas.get(position).getRedBall()+"  "+mDatas.get(position).getBuleBall());
+            itemViewHolder.mItemText.setTextArrColor("  "+mDatas.get(position).getBuleBall(),getContext().getResources().getColor(R.color.blue));
 
             itemViewHolder.mItemImageDele.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -128,11 +143,11 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
     }
     /*底部Item*/
     class FootHolder extends ClickableViewHolder {
-        public TextView textViewFoot;
+        public LinearLayout layout_deleAll;
 
         public FootHolder(View itemView) {
             super(itemView);
-           // textViewFoot = (TextView) $(android.R.id.text1);
+            layout_deleAll = (LinearLayout) $(R.id.layout_deleAll);
         }
     }
 

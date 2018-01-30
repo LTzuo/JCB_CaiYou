@@ -1,10 +1,13 @@
 package com.cjkj.jcb_caiyou.entity.lottery.SSQ;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 双色球实体
  * Created by 1 on 2018/1/29.
  */
-public class SSQEntity {
+public class SSQEntity implements Parcelable {
 
     private String redBall; //红球数组
 
@@ -15,10 +18,11 @@ public class SSQEntity {
     private String money;     //金额
 
     public SSQEntity(){
-
+       super();
     }
 
     public SSQEntity(String redBall,String buleBall,String zhuCount,String money){
+        super();
         this.redBall = redBall;
         this.buleBall = buleBall;
         this.zhuCount = zhuCount;
@@ -58,6 +62,30 @@ public class SSQEntity {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // 序列化过程：必须按成员变量声明的顺序进行封装
+        dest.writeString(redBall);
+        dest.writeString(buleBall);
+        dest.writeString(zhuCount);
+        dest.writeString(money);
+    }
 
+    public static final Parcelable.Creator<SSQEntity> CREATOR = new Creator<SSQEntity>() {
+
+        @Override
+        public SSQEntity createFromParcel(Parcel source) {
+            return new SSQEntity(source.readString(), source.readString(),source.readString(),source.readString());
+        }
+
+        @Override
+        public SSQEntity[] newArray(int size) {
+            return new SSQEntity[size];
+        }
+    };
 }

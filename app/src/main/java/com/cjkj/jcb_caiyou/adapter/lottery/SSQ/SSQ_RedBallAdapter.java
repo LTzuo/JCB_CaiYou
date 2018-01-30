@@ -51,7 +51,6 @@ public class SSQ_RedBallAdapter extends AbsRecyclerViewAdapter {
             itemChoice[i] = false;
         }
         int[] random = LotteryAlgorithmUtils.randomCommon(0, itemNames.length+1, 6);
-        StringBuffer buffer = new StringBuffer();
         for (int index : random) {
             itemChoice[index-1] = true;
         }

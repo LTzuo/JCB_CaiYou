@@ -22,6 +22,7 @@ import com.cjkj.jcb_caiyou.sensor.ShakeSensor;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.LotteryAlgorithmUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
+import com.cjkj.jcb_caiyou.widget.RvGridLayoutManager;
 import com.jiang.android.indicatordialog.IndicatorBuilder;
 import com.jiang.android.indicatordialog.IndicatorDialog;
 import com.sflin.csstextview.CSSTextView;
@@ -164,9 +165,10 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
     }
 
     private void initRedBall() {
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 7);
+        RvGridLayoutManager mLayoutManager = new RvGridLayoutManager(getContext(), 7);
         mRedBallAdapter = new SSQ_RedBallAdapter(mRedBallRecyclerView);
         mRedBallRecyclerView.setLayoutManager(mLayoutManager);
+        mRedBallRecyclerView.setNestedScrollingEnabled(false);
         mRedBallRecyclerView.setAdapter(mRedBallAdapter);
         //禁止滑动
         mRedBallRecyclerView.setNestedScrollingEnabled(false);
@@ -180,9 +182,10 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
     }
 
     private void initBuleBall() {
-        GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 7);
+        RvGridLayoutManager mLayoutManager = new RvGridLayoutManager(getContext(), 7);
         mBuleBallAdapter = new SSQ_BuleBallAdapter(mBlueBallRecyclerView);
         mBlueBallRecyclerView.setLayoutManager(mLayoutManager);
+        mBlueBallRecyclerView.setNestedScrollingEnabled(false);
         mBlueBallRecyclerView.setAdapter(mBuleBallAdapter);
         mBuleBallAdapter.setOnItemClickListener(new AbsRecyclerViewAdapter.OnItemClickListener() {
             @Override
