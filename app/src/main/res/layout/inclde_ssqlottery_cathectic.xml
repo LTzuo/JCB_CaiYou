@@ -58,8 +58,6 @@
         android:id="@+id/mSSQCathectRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingTop="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:overScrollMode="never"

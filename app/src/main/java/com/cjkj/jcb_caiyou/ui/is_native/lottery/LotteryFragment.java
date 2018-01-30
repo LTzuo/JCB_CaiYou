@@ -2,6 +2,7 @@ package com.cjkj.jcb_caiyou.ui.is_native.lottery;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import com.cjkj.jcb_caiyou.ui.is_native.lottery.SSQ.SSQ_LotteryActivity;
 import com.cjkj.jcb_caiyou.util.GlideImageLoader;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
+import com.cjkj.jcb_caiyou.widget.RecycleViewDivider;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;

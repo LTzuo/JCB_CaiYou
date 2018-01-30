@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
@@ -22,10 +23,38 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
     private static final int ITEM_TYPE_HEADER = 1;
     private static final int ITEM_TYPE_FOOTER = 2;
 
+//    public interface OnItemDeleListener{
+//        void onItemDele(int position);
+//    }
+//    private OnItemDeleListener mItemDeleListener;
+//    public void setOnItemDeleListener(OnItemDeleListener mItemDeleListener){
+//        this.mItemDeleListener = mItemDeleListener;
+//    }
+
     private List<SSQEntity> mDatas = new ArrayList<>();
 
     public void setInfo(List<SSQEntity> datas) {
         this.mDatas = datas;
+    }
+
+    /**
+     * 添加单条数据
+     * @param position
+     * @param entity
+     */
+    public void addData(int position,SSQEntity entity) {
+        mDatas.add(position, entity);
+        notifyItemInserted(position);//通知演示插入动画
+        notifyItemRangeChanged(position,mDatas.size()-position);//通知数据与界面重新绑定
+    }
+
+    /**
+     * 移除单条数据
+     * @param holder
+     */
+    public void removeData(ClickableViewHolder holder) {
+            mDatas.remove(holder.getAdapterPosition());
+            notifyItemRemoved(holder.getAdapterPosition());
     }
 
     public SSQ_CathecticAdapter(RecyclerView recyclerView){
@@ -47,7 +76,7 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
     }
 
     @Override
-    public void onBindViewHolder(ClickableViewHolder holder, int position) {
+    public void onBindViewHolder(final ClickableViewHolder holder, int position) {
 //        if (holder instanceof HeaderHolder) {
 //            HeaderHolder headerHolder = (HeaderHolder) holder;
 //           // headerHolder.textViewHeader.setText("");
@@ -60,21 +89,29 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             itemViewHolder.mItemText.setText(mDatas.get(position).getRedBall()+" "+mDatas.get(position).getBuleBall());
             itemViewHolder.mItemText.setTextArrColor(" "+mDatas.get(position).getBuleBall(),getContext().getResources().getColor(R.color.blue));
+
+            itemViewHolder.mItemImageDele.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   removeData(holder);
+                }
+            });
         }
         super.onBindViewHolder(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return mDatas == null ? 0:mDatas.size();
+        return mDatas == null ? 0 : mDatas.size()+1;
     }
 
     /*根据位置来返回不同的item类型*/
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
-            return ITEM_TYPE_HEADER;
-        } else if (position + 1 == getItemCount()) {
+//        if (position == 0) {
+//            return ITEM_TYPE_HEADER;
+//        } else
+        if (position + 1 == getItemCount()) {
             return ITEM_TYPE_FOOTER;
         } else
             return 0;
@@ -102,10 +139,11 @@ public class SSQ_CathecticAdapter extends AbsRecyclerViewAdapter {
     public class ItemViewHolder extends ClickableViewHolder {
 
         public CSSTextView mItemText;
-
+        public ImageView mItemImageDele;
         public ItemViewHolder(View itemView) {
             super(itemView);
             mItemText = $(R.id.mItemText);
+            mItemImageDele = $(R.id.item_dele);
         }
     }
 }
