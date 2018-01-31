@@ -1,28 +1,28 @@
 package com.cjkj.jcb_caiyou.ui.is_native.lottery.SSQ;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
+import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.helper.AbsRecyclerViewAdapter;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_CathecticAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
 import com.cjkj.jcb_caiyou.entity.lottery.SSQ.SSQEntity;
-import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.LotteryAlgorithmUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
-
+import com.sflin.csstextview.CSSTextView;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * 双色球投注界面
@@ -42,35 +42,48 @@ public class SSQ_CathecticActivity extends RxBaseActivity {
     };
 
     public enum RandomEnum {
-        ONERANDOM(1), FIVERANDOM(5), TENRANDOM(10);
-        int RANDOM;
-
-        RandomEnum(int RANDOM) {
-            this.RANDOM = RANDOM;
+        ONERANDOM(1, "机选1注"), FIVERANDOM(5, "机选1注"), TENRANDOM(10, "机选5注");
+        int value;
+        String name;
+        RandomEnum(int value, String name) {
+            this.value = value;
+            this.name = name;
         }
-
         public int getValue() {
-            return RANDOM;
+            return value;
         }
+    }
+
+    /**
+     * 计算当前页面的总注数和总金额
+     */
+    public void Calculation() {
+        tv_calculation.setText("合计"+2*mAdapter.getZhuAllCount()+"元");
+        tv_calculation.setTextArrColor("合计",getResources().getColor(R.color.background_dark));
+        tv_calculation.setTextArrColor("元",getResources().getColor(R.color.background_dark));
+        tv_zhu.setText("共"+mAdapter.getZhuAllCount()+"注");
     }
 
     @Bind(R.id.toolbar)
     Toolbar mToolbar;
     @Bind(R.id.mSSQCathectRecyclerView)
     RecyclerView mRecyclerView;
-
+    @Bind(R.id.tv_calculation)
+    CSSTextView tv_calculation;
+    @Bind(R.id.tv_zhu)
+    TextView tv_zhu;
     SSQ_CathecticAdapter mAdapter;
-
     List<SSQEntity> mDatas = new ArrayList<>();
 
-    @OnClick({R.id.random_1, R.id.random_5, R.id.random_10})
+    private int random;
+    @OnClick({R.id.tv_continue, R.id.random_1, R.id.random_5})
     public void BtnClick(View v) {
-        if (v.getId() == R.id.random_1) {
+        if (v.getId() == R.id.tv_continue) {
+            ToastUtil.ShortToast("继续选号");
+        } else if (v.getId() == R.id.random_1) {
             randomSwich(RandomEnum.ONERANDOM);
         } else if (v.getId() == R.id.random_5) {
             randomSwich(RandomEnum.FIVERANDOM);
-        } else if (v.getId() == R.id.random_10) {
-            randomSwich(RandomEnum.TENRANDOM);
         }
     }
 
@@ -80,28 +93,41 @@ public class SSQ_CathecticActivity extends RxBaseActivity {
      * @param mRandomEnum
      */
     private void randomSwich(RandomEnum mRandomEnum) {
-        for (int i = 0; i < mRandomEnum.getValue(); i++) {
-            random();
-        }
+        Observable.create(new Observable.OnSubscribe<List<SSQEntity>>() {
+            @Override
+            public void call(Subscriber<? super List<SSQEntity>> subscriber) {
+                subscriber.onNext(random(mRandomEnum));
+                subscriber.onCompleted();
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(list -> {
+                    mAdapter.addData(0, list);
+                    mRecyclerView.scrollToPosition(0);
+                    Calculation();
+                }, throwable -> {
+                });
     }
 
     /**
      * 机选
      */
-    private void random() {
-        int[] random_red = LotteryAlgorithmUtils.randomCommon(0, RED.length + 1, 6);
-        int[] random_bule = LotteryAlgorithmUtils.randomCommon(0, BULE.length + 1, 1);
-        StringBuffer buffer_red = new StringBuffer();
-        StringBuffer buffer_bule = new StringBuffer();
-
-        for (int index : random_red) {
-            buffer_red.append(RED[index - 1] + " ");
+    private List<SSQEntity> random(RandomEnum mRandomEnum) {
+        List<SSQEntity> list = new ArrayList<>();
+        list.clear();
+        for (int i = 0; i < mRandomEnum.getValue(); i++) {
+            int[] random_red = LotteryAlgorithmUtils.randomCommon(0, RED.length + 1, 6);
+            int[] random_bule = LotteryAlgorithmUtils.randomCommon(0, BULE.length + 1, 1);
+            StringBuffer buffer_red = new StringBuffer();
+            StringBuffer buffer_bule = new StringBuffer();
+            for (int index : random_red) {
+                buffer_red.append(RED[index - 1] + " ");
+            }
+            for (int index : random_bule) {
+                buffer_bule.append(BULE[index - 1]);
+            }
+            list.add(new SSQEntity(buffer_red.toString(), buffer_bule.toString(), 1, 2));
         }
-        for (int index : random_bule) {
-            buffer_bule.append(BULE[index - 1]);
-        }
-        mAdapter.addData(0, new SSQEntity(buffer_red.toString(), buffer_bule.toString(), "1", "2"));
-        mRecyclerView.scrollToPosition(0);
+        return list;
     }
 
     @Override
@@ -111,25 +137,61 @@ public class SSQ_CathecticActivity extends RxBaseActivity {
 
     @Override
     public void initViews(Bundle savedInstanceState) {
+        initRecyclerView();
+        loadData();
+    }
+
+    @Override
+    public void initRecyclerView() {
         mAdapter = new SSQ_CathecticAdapter(mRecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        //设置分割线
         // mRecyclerView.addItemDecoration(new RecycleViewDivider());
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());//设置Item增加、移除动画
-        mAdapter.setInfo(mDatas);
-        mAdapter.notifyDataSetChanged();
         mAdapter.setOnItemClickListener(new AbsRecyclerViewAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(final  int position, AbsRecyclerViewAdapter.ClickableViewHolder holder) {
-
-                if (holder.getItemViewType() != mAdapter.ITEM_TYPE_FOOTER){
-                    Intent i = new Intent(SSQ_CathecticActivity.this, SSQ_LotteryActivity.class);
-                    i.putExtra("SSQEntity", (Parcelable) mDatas.get(position));
-                    startActivity(i);
+            public void onItemClick(final int position, AbsRecyclerViewAdapter.ClickableViewHolder holder) {
+                if (holder.getItemViewType() != mAdapter.ITEM_TYPE_FOOTER) {
+                    ToastUtil.ShortToast(mAdapter.getmDatas().get(position).getRedBall()+","+mAdapter.getmDatas().get(position).getBuleBall());
                 }
             }
         });
+    }
+
+    @Override
+    public void loadData() {
+        random = getIntent().getIntExtra("random",0);
+        if(random == 0){
+           mDatas.add(getIntent().getParcelableExtra("SSQEntity"));
+        }
+        Observable.just(mDatas)
+                .compose(bindToLifecycle())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(mDatas -> {
+                    mAdapter.setInfo(mDatas);
+                    finishTask();
+                }, throwable -> {
+                });
+    }
+
+    @Override
+    public void finishTask() {
+        mAdapter.notifyDataSetChanged();
+        switch (random){
+            case 0:
+                Calculation();
+                break;
+            case 1:
+                randomSwich(RandomEnum.ONERANDOM);
+                break;
+            case 5:
+                randomSwich(RandomEnum.FIVERANDOM);
+                break;
+            case 10:
+                randomSwich(RandomEnum.TENRANDOM);
+                break;
+        }
     }
 
     @Override
@@ -140,6 +202,5 @@ public class SSQ_CathecticActivity extends RxBaseActivity {
         mToolbar.setTitleTextColor(getResources().getColor(R.color.white));
         mToolbar.setPopupTheme(R.style.ToolBarPopupThemeDay);
     }
-
 
 }

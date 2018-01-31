@@ -76,6 +76,20 @@ public class SSQ_BuleBallAdapter extends AbsRecyclerViewAdapter {
         notifyDataSetChanged();
     }
 
+    /**
+     * 获取选中的球
+     * @return
+     */
+    public String getBalls(){
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < itemChoice.length ; i++) {
+            if(itemChoice[i]){
+                buffer.append(itemNames[i]+" ");
+            }
+        }
+        return buffer.toString();
+    }
+
     @Override
     public ClickableViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         bindContext(parent.getContext());

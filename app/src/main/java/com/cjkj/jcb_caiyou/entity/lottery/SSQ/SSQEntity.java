@@ -13,15 +13,15 @@ public class SSQEntity implements Parcelable {
 
     private String buleBall; //篮球数组
 
-    private String zhuCount;   //注数
+    private int zhuCount;   //注数
 
-    private String money;     //金额
+    private int money;     //金额
 
     public SSQEntity(){
        super();
     }
 
-    public SSQEntity(String redBall,String buleBall,String zhuCount,String money){
+    public SSQEntity(String redBall,String buleBall,int zhuCount,int money){
         super();
         this.redBall = redBall;
         this.buleBall = buleBall;
@@ -45,19 +45,19 @@ public class SSQEntity implements Parcelable {
         this.buleBall = buleBall;
     }
 
-    public String getZhuCount() {
+    public int getZhuCount() {
         return zhuCount;
     }
 
-    public void setZhuCount(String zhuCount) {
+    public void setZhuCount(int zhuCount) {
         this.zhuCount = zhuCount;
     }
 
-    public String getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
@@ -72,15 +72,15 @@ public class SSQEntity implements Parcelable {
         // 序列化过程：必须按成员变量声明的顺序进行封装
         dest.writeString(redBall);
         dest.writeString(buleBall);
-        dest.writeString(zhuCount);
-        dest.writeString(money);
+        dest.writeInt(zhuCount);
+        dest.writeInt(money);
     }
 
     public static final Parcelable.Creator<SSQEntity> CREATOR = new Creator<SSQEntity>() {
 
         @Override
         public SSQEntity createFromParcel(Parcel source) {
-            return new SSQEntity(source.readString(), source.readString(),source.readString(),source.readString());
+            return new SSQEntity(source.readString(), source.readString(),source.readInt(),source.readInt());
         }
 
         @Override

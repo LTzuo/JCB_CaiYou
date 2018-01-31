@@ -17,35 +17,35 @@
         android:layout_marginRight="15dp"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/random_1"
+            android:id="@+id/tv_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="7dp"
             android:layout_margin="5dp"
             android:gravity="center"
             android:background="@color/white"
+            android:layout_weight="1"
+            android:text="+继续选号"/>
+        <TextView
+            android:id="@+id/random_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:layout_margin="5dp"
+            android:background="@color/white"
+            android:gravity="center"
             android:layout_weight="1"
             android:text="+机选1注"/>
         <TextView
             android:id="@+id/random_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:padding="7dp"
             android:layout_margin="5dp"
-            android:background="@color/white"
             android:gravity="center"
             android:layout_weight="1"
             android:text="+机选5注"/>
-        <TextView
-            android:id="@+id/random_10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="7dp"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="+机选10注"/>
     </LinearLayout>
     <ImageView
         android:layout_width="match_parent"

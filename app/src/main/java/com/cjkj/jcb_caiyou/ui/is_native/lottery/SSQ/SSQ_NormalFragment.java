@@ -1,6 +1,7 @@
 package com.cjkj.jcb_caiyou.ui.is_native.lottery.SSQ;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -18,6 +19,7 @@ import com.cjkj.jcb_caiyou.adapter.indicatordialog.IndicatorDialogViewHolder;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_BuleBallAdapter;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_RedBallAdapter;
 import com.cjkj.jcb_caiyou.base.RxLazyFragment;
+import com.cjkj.jcb_caiyou.entity.lottery.SSQ.SSQEntity;
 import com.cjkj.jcb_caiyou.sensor.ShakeSensor;
 import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.LotteryAlgorithmUtils;
@@ -30,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
-
 /**
  * 双色球-普通投注
  * Created by 1 on 2018/1/26.
@@ -81,8 +82,16 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
                 isSensorRegist = true;
             }
         }else if(v.getId() == R.id.next){
-            IntentUtils.Goto(getActivity(),SSQ_CathecticActivity.class);
-            getActivity().finish();
+            if(mRedBallAdapter.getBallCount()>=6 && mBuleBallAdapter.getBallCount()>=1) {
+                int count = Integer.valueOf(LotteryAlgorithmUtils.Calculation(mRedBallAdapter.getBallCount(),6,mBuleBallAdapter.getBallCount(),1));
+                Intent i = new Intent(getActivity(), SSQ_CathecticActivity.class);
+                i.putExtra("random", 0);
+                i.putExtra("SSQEntity", new SSQEntity(mRedBallAdapter.getBalls(), mBuleBallAdapter.getBalls(), count, 2*count));
+                getActivity().startActivity(i);
+                getActivity().finish();
+            }else{
+                ToastUtil.ShortToast("请选一注");
+            }
         }else if(v.getId() == R.id.tv_random){
             showBottomDialog(v, 0.1f, IndicatorBuilder.GRAVITY_LEFT);
         }else if(v.getId() == R.id.img_dele){
@@ -114,15 +123,12 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
                     public void onBindView(IndicatorDialogViewHolder holder, int position) {
                         TextView tv = holder.getView(R.id.item_add);
                         tv.setText(mLists.get(position));
-
                         if (position == mLists.size() - 1) {
                             holder.setVisibility(R.id.item_line, IndicatorDialogViewHolder.GONE);
                         } else {
                             holder.setVisibility(R.id.item_line, IndicatorDialogViewHolder.VISIBLE);
-
                         }
                     }
-
                     @Override
                     public int getLayoutID(int position) {
                         return R.layout.item_indicator_dialog;
@@ -135,7 +141,10 @@ public class SSQ_NormalFragment extends RxLazyFragment implements ShakeSensor.on
 
                     @Override
                     public void onItemClick(View v, int position) {
-                        ToastUtil.ShortToast(""+position);
+                        Intent i = new Intent(getActivity(),SSQ_CathecticActivity.class);
+                        i.putExtra("random",Integer.valueOf(mLists.get(position).replace("注","")));
+                        getActivity().startActivity(i);
+                        getActivity().finish();
                     }
 
                     @Override

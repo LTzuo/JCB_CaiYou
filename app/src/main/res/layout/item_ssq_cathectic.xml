@@ -36,9 +36,9 @@
                 android:textColor="@color/red_liget" />
 
             <TextView
+                android:id="@id/item_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1注2元"
                 android:textColor="@color/font_gray"
                 android:textSize="12dp" />
         </LinearLayout>
