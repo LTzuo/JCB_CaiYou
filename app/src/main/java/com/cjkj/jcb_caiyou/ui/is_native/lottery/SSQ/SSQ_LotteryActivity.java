@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.cjkj.jcb_caiyou.R;
 import com.cjkj.jcb_caiyou.adapter.lottery.SSQ.SSQ_ViewPagerAdapter;
 import com.cjkj.jcb_caiyou.base.RxBaseActivity;
+import com.cjkj.jcb_caiyou.util.IntentUtils;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.cjkj.jcb_caiyou.widget.tabbarhelper.NoScrollViewPager;
 import butterknife.Bind;
@@ -41,7 +42,7 @@ public class SSQ_LotteryActivity extends RxBaseActivity {
     @OnClick(R.id.menu_custom)
     public void BtnClick(View v){
             if(v.getId() == R.id.menu_custom){
-            ToastUtil.ShortToast("走势图");
+                IntentUtils.Goto(this,LotteryTrendActivity.class);
         }
     }
 

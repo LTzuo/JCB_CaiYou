@@ -95,12 +95,18 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <!--双色球投注界面-->
+        <!-- 双色球投注界面 -->
         <activity
             android:name=".ui.is_native.lottery.SSQ.SSQ_CathecticActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--彩票走势-->
+        <activity
+            android:name=".ui.is_native.lottery.SSQ.LotteryTrendActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="QcCVZyvZnZk2E9ZPBTDZZPtdIPvDjGT0" />
