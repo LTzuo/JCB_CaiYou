@@ -5,6 +5,8 @@
 支持胆拖投注
 
 # 效果图
-![](http://upload-images.jianshu.io/upload_images/7077845-469a636d59e3b1b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/250)
-![](http://upload-images.jianshu.io/upload_images/7077845-af4db660537a9d57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/250)
-![](http://upload-images.jianshu.io/upload_images/7077845-6c77deab6025772c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/250)
+![](http://upload-images.jianshu.io/upload_images/7077845-469a636d59e3b1b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
+![](http://upload-images.jianshu.io/upload_images/7077845-af4db660537a9d57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
+![](http://upload-images.jianshu.io/upload_images/7077845-6c77deab6025772c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
+![](http://upload-images.jianshu.io/upload_images/7077845-6b5edb30ea3cb1b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
+![](http://upload-images.jianshu.io/upload_images/7077845-d223baac16cf55c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/270)
