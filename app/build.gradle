@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.mob.sdk'
 
 buildscript {
     repositories {
@@ -13,7 +14,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url 'https://jitpack.io' }
+       // maven { url 'https://jitpack.io' }
     }
 }
 
@@ -42,6 +43,27 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+//第三方组件
+MobSDK{
+    appKey "244f14c4b8127"
+    appSecret "bf8ff7f097da9121bd87e7d8851b8f90"
+    ShareSDK {
+        //平台配置信息
+        devInfo {
+            Wechat {
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+
+            WechatMoments{
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -77,4 +99,5 @@ dependencies {
     compile 'com.github.jiang111:IndicatorDialog:v1.3.8'
     //锯齿边缘view
     compile 'com.github.dongjunkun:CouponView:1.0.4'
+
 }

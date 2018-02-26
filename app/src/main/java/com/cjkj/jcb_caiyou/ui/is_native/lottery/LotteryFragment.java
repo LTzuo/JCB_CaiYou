@@ -148,7 +148,13 @@ public class LotteryFragment extends RxLazyFragment implements LotteryContract.I
     @Override
     protected void finishTask() {
         super.finishTask();
-        mSwipeRefreshLayout.setRefreshing(false);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        },1*1000);
+
     }
 
     @Override

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -23,9 +24,11 @@ import com.cjkj.jcb_caiyou.util.SnackbarUtil;
 import com.cjkj.jcb_caiyou.util.ToastUtil;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 import java.util.TimerTask;
 import butterknife.Bind;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import rx.Subscriber;
 /**
  * 主页h5
@@ -62,6 +65,10 @@ public class H5MainActivity extends RxBaseActivity {
         ws.setAppCacheMaxSize(1024);
         ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         ws.setUseWideViewPort(true);
+        // 开启DOM缓存，开启LocalStorage存储（html5的本地存储方式）
+        ws.setDomStorageEnabled(true);
+        ws.setDatabaseEnabled(true);
+        ws.setDatabasePath(this.getApplicationContext().getCacheDir().getAbsolutePath());
         // 优先使用缓存
         // ws.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         // 自动加载图片
@@ -81,6 +88,7 @@ public class H5MainActivity extends RxBaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 //        refreshLayout.startRefresh();
 //        refreshLayout.setOnRefreshListener(new RefreshListenerAdapter() {
 //            @Override
@@ -162,7 +170,32 @@ public class H5MainActivity extends RxBaseActivity {
             Intent i = new Intent(H5MainActivity.this,LoginActivity.class);
             startActivity(i);
         }
+
+        @JavascriptInterface
+        public void GoShare(String title,String content,String shareUrl,String imgSrc) throws UnsupportedEncodingException {
+            String s_title = java.net.URLDecoder.decode(title,"UTF-8");
+            String s_content = java.net.URLDecoder.decode(content,"UTF-8");
+            String s_shareUrl = java.net.URLDecoder.decode(shareUrl,"UTF-8");
+            String s_imgSrc = java.net.URLDecoder.decode(imgSrc,"UTF-8");
+//            ToastUtil.ShortToast(s_title+"-----"+s_content+"-----"+s_shareUrl+"-----"+s_imgSrc);
+            showShare(s_title,s_content,s_shareUrl,s_imgSrc);
+        }
 	}
+
+    private void showShare(String title,String content,String shareUrl,String imgSrc) {
+        OnekeyShare oks = new OnekeyShare();
+        oks.disableSSOWhenAuthorize();
+        oks.setTitle(title);
+//        // titleUrl QQ和QQ空间跳转链接
+//        oks.setTitleUrl("http://sharesdk.cn");
+        oks.setText(content);
+        oks.setImagePath(imgSrc);
+        oks.setUrl(shareUrl);
+//        // comment是我对这条分享的评论，仅在人人网使用
+//        oks.setComment("我是测试评论文本");
+        // 启动分享GUI
+        oks.show(this);
+}
 
     public class MyWebViewClient extends WebViewClient {
 

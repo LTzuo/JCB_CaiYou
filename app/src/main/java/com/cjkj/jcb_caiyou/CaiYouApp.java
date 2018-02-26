@@ -3,6 +3,7 @@ package com.cjkj.jcb_caiyou;
 import android.app.Application;
 
 import com.cjkj.jcb_caiyou.ac_manager.ActivityManager;
+import com.mob.MobSDK;
 
 /**
  * Created by 1 on 2018/1/11.
@@ -17,6 +18,7 @@ public class CaiYouApp extends Application {
         mInstance = this;
         //注册Activity管理器
         ActivityManager.getInstance().register(this);
+        MobSDK.init(this);
         init();
     }
 
